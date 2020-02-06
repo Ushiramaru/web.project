@@ -1,0 +1,133 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+/*| Navigation |*/
+
+body {
+    min-width: 1000px;
+    background-color: rgb(135, 206, 250);
+}
+
+header {
+    padding: 5px;
+    color: white;
+    width: 100%;
+    background-color: black;
+}
+
+header h1 {
+    line-height: 100%;
+}
+
+.main {
+    width: 100%;
+}
+
+/*.main:after {*/
+/*    display: block;*/
+/*    content: "";*/
+/*    clear: both;*/
+/*}*/
+
+.navbar-menu {
+    margin-top: 15px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 3px 10px -2px rgba(0, 0, 0, .1);
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.navbar-menu:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+nav {
+    display: block;
+    width: 100%;
+}
+
+nav:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+nav ul {
+    list-style: none;
+    position: relative;
+    float: right;
+    margin-right: 100px;
+    display: inline-table;
+}
+
+nav ul li {
+    float: left;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+/*nav ul li:hover {*/
+/*    background: rgba(0, 0, 0, .15);*/
+/*}*/
+
+/*nav ul li:hover > ul {*/
+/*    display: block;*/
+/*}*/
+
+nav ul li {
+    float: left;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+nav ul li a {
+    display: block;
+    padding: 30px 20px;
+    color: #222;
+    font-size: .9em;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.container {
+    width: 100%;
+    padding: 5px;
+}
+
+/*nav ul ul {*/
+/*    display: none;*/
+/*    background: #fff;*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    box-shadow: -3px 3px 10px -2px rgba(0, 0, 0, .1);*/
+/*    border: 1px solid rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*nav ul ul li {*/
+/*    float: none;*/
+/*    position: relative;*/
+/*}*/
+
+/*nav ul ul li a {*/
+/*    padding: 15px 30px;*/
+/*    border-bottom: 1px solid rgba(0, 0, 0, .05);*/
+/*}*/
+
+/*nav ul ul ul {*/
+/*    position: absolute;*/
+/*    left: 100%;*/
+/*    top: 0;*/
+/*}*/

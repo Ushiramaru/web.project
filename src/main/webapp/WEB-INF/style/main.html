@@ -1,0 +1,44 @@
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<html>
+<head>
+    <title>Title</title>
+    <link href="main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <img src="../image/logo.png" alt="логотип" class="logo">
+        <div class="pageTitle">Конференция</div>
+        <div class="localization">
+            <div class="language"><a href="/controller?command=something"><img src="../image/flag/UK.jpg" alt="UK"></a>
+            </div>
+            Локализация
+        </div>
+        <div id="exit-div">
+            <button onclick="location.href='/controller?command=registration'">Выход</button>
+        </div>
+    </div>
+</header>
+<div class="main">
+    <div class="container">
+        <div class="menu">
+            <button class="nav" onclick="location.href='/controller?command=registration'">Конференции</button>
+            <button class="nav" onclick="location.href='/controller?command=registration'">Заявки</button>
+            <button class="nav" onclick="location.href='/controller?command=registration'">Вопросы</button>
+            <button class="nav" onclick="location.href='/controller?command=registration'">Пользователи</button>
+        </div>
+        <div class="workSurface">
+            <div class="pages">
+                <div class="page">1</div>
+                <div class="page">2</div>
+                <div class="page">3</div>
+                <div class="page">4</div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">footer</div>
+</footer>
+</body>
+</html>
