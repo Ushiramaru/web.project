@@ -23,6 +23,10 @@ public class CommandFactory {
                 return new LoginCommand(new UserService(new DaoHelperFactory()));
             case "ask":
                 return new AskCommand(new QuestionService(new DaoHelperFactory()));
+            case "block":
+                return new BlockCommand(new UserService(new DaoHelperFactory()));
+            case "unblock":
+                return new UnblockCommand(new UserService(new DaoHelperFactory()));
             case "answerAdmin":
                 return new AnswerAdminCommand(new AnswerService(new DaoHelperFactory()));
             case "answerPage":

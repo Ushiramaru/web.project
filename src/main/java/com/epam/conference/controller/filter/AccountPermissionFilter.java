@@ -21,6 +21,8 @@ public class AccountPermissionFilter implements Filter {
         commandRoleMap.put("userAdmin", userRoles);
         commandRoleMap.put("answerPage", userRoles);
         commandRoleMap.put("questionAdmin", userRoles);
+        commandRoleMap.put("unblock", userRoles);
+        commandRoleMap.put("block", userRoles);
 
         userRoles = new ArrayList<>(Collections.singletonList(UserRole.USER));
         commandRoleMap.put("applyPage", userRoles);
@@ -35,8 +37,6 @@ public class AccountPermissionFilter implements Filter {
         commandRoleMap.put("ask", userRoles);
 
         userRoles = new ArrayList<>(Arrays.asList(UserRole.USER, UserRole.ADMINISTRATOR));
-        commandRoleMap.put("login", userRoles);
-        commandRoleMap.put("loginPage", userRoles);
         commandRoleMap.put("success", userRoles);
         commandRoleMap.put("mainPage", userRoles);
         commandRoleMap.put("logout", userRoles);

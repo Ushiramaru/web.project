@@ -9,6 +9,10 @@ public interface UserDao extends Dao<User>{
 
     Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException;
 
+    void blockById(Long id) throws DaoException;
+
+    void unblockById(Long id) throws DaoException;
+
 //    void registerUser(String login, String password, String name) throws DaoException;
 
 }

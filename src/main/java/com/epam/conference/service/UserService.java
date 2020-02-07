@@ -18,6 +18,24 @@ public class UserService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
+    public void blockById(Long id) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            UserDao dao = factory.createUserDao();
+            dao.blockById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void unblockById(Long id) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            UserDao dao = factory.createUserDao();
+            dao.unblockById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public Optional<User> login(String login, String password) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             UserDao dao = factory.createUserDao();
