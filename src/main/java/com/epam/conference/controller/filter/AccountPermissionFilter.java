@@ -1,10 +1,7 @@
 package com.epam.conference.controller.filter;
 
-import com.epam.conference.controller.command.impl.*;
-import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.entity.User;
 import com.epam.conference.entity.enums.UserRole;
-import com.epam.conference.service.*;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -15,18 +12,13 @@ import java.util.*;
 
 public class AccountPermissionFilter implements Filter {
 
-    private final Map<String, List<UserRole>> commandRoleMap = new HashMap<>();
+    private final static Map<String, List<UserRole>> commandRoleMap = new HashMap<>();
 
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        List<UserRole> userRoles = new ArrayList<>(Collections.singletonList(UserRole.UNREGISTERED));
-        commandRoleMap.put("login", userRoles);
-        commandRoleMap.put("loginPage", userRoles);
-
-        userRoles = new ArrayList<>(Collections.singletonList(UserRole.ADMINISTRATOR));
+    static {
+        List<UserRole> userRoles = new ArrayList<>(Collections.singletonList(UserRole.ADMINISTRATOR));
         commandRoleMap.put("success", userRoles);
         commandRoleMap.put("answerAdmin", userRoles);
+        commandRoleMap.put("userAdmin", userRoles);
         commandRoleMap.put("answerPage", userRoles);
         commandRoleMap.put("questionAdmin", userRoles);
 
@@ -43,9 +35,16 @@ public class AccountPermissionFilter implements Filter {
         commandRoleMap.put("ask", userRoles);
 
         userRoles = new ArrayList<>(Arrays.asList(UserRole.USER, UserRole.ADMINISTRATOR));
+        commandRoleMap.put("login", userRoles);
+        commandRoleMap.put("loginPage", userRoles);
         commandRoleMap.put("success", userRoles);
         commandRoleMap.put("mainPage", userRoles);
         commandRoleMap.put("logout", userRoles);
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
     }
 
     @Override

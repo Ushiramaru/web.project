@@ -27,8 +27,13 @@ public class UserService {
         }
     }
 
-    public List<User> getAll() {
-        return null;
+    public List<User> getAll() throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            UserDao dao = factory.createUserDao();
+            return dao.getAll();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
     }
 
 }

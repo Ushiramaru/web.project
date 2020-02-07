@@ -17,6 +17,8 @@ public class CommandFactory {
                 return new ShowPageCommand("/WEB-INF/success.jsp");
             case "mainPage":
                 return new ShowPageCommand("/WEB-INF/main.jsp");
+            case "userAdmin":
+                return new UserAdminCommand(new UserService(new DaoHelperFactory()));
             case "login":
                 return new LoginCommand(new UserService(new DaoHelperFactory()));
             case "ask":
