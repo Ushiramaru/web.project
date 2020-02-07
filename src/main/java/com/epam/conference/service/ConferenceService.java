@@ -27,6 +27,15 @@ public class ConferenceService {
         }
     }
 
+    public List<Conference> getAllRelevant() throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            ConferenceDao dao = factory.createConferenceDao();
+            return dao.getAllRelevant();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public Optional<Conference> getById(Long id) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             ConferenceDao dao = factory.createConferenceDao();

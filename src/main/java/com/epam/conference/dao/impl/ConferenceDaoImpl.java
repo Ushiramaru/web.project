@@ -3,6 +3,7 @@ package com.epam.conference.dao.impl;
 import com.epam.conference.dao.ConferenceDao;
 import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.entity.Conference;
+import com.epam.conference.mapper.impl.entity.ConferenceRowMapper;
 
 import java.sql.Connection;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
 public class ConferenceDaoImpl extends AbstractDao<Conference> implements ConferenceDao {
 
     private static final String SAVE_QUERY = "insert into conference (name, start_date, end_date, img) VALUES ('?', '?', '?', '?')";
+    private static final String GET_ALL_BY_RELEVANT_QUERY = "select * from conference where is_relevant = ?";
 
     public ConferenceDaoImpl(Connection connection) {
         super(connection);
@@ -29,6 +31,11 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     @Override
     public List<Conference> getAll() throws DaoException {
         return super.getAll();
+    }
+
+    @Override
+    public List<Conference> getAllRelevant() throws DaoException {
+        return super.executeQuery(GET_ALL_BY_RELEVANT_QUERY, new ConferenceRowMapper(), true);
     }
 
     @Override

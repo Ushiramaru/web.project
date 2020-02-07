@@ -20,7 +20,7 @@ public class ConferenceCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        List<Conference> conferences = service.getAll();
+        List<Conference> conferences = service.getAllRelevant();
         request.setAttribute("conferences", conferences);
 
         return CommandResult.forward("/WEB-INF/conference.jsp");

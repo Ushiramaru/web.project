@@ -27,11 +27,15 @@ public class ConferenceInfoCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Long conferenceId = Long.valueOf(request.getParameter("conference_id"));
 
-        Optional<Conference> conference = conferenceService.getById(conferenceId);
-        if (!conference.isPresent()) {
-            throw new ServiceException();
+        Optional<Conference> optionalConference = conferenceService.getById(conferenceId);
+        if (!optionalConference.isPresent()) {
+            throw new ServiceException("Specified conference doesn't exist");
         }
-        request.setAttribute("conference", conference.get());
+        Conference conference = optionalConference.get();
+        if (!conference.isRelevant()) {
+            throw new ServiceException("Specified conference doesn't relevant");
+        }
+        request.setAttribute("conference", conference);
 
         List<Section> sections = sectionService.getAllByConferenceId(conferenceId);
         request.setAttribute("sections", sections);
