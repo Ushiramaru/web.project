@@ -15,8 +15,7 @@ public class ProxyConnection implements Connection {
         this.pool = pool;
     }
 
-    public void returnToPool() throws SQLException {
-        this.setAutoCommit(true);
+    public void returnToPool() {
         pool.returnConnection(this);
     }
 
