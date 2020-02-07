@@ -1,6 +1,7 @@
 package com.epam.conference.service;
 
 import com.epam.conference.dao.SectionDao;
+import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.entity.Section;
@@ -21,7 +22,7 @@ public class SectionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             SectionDao dao = factory.createSectionDao();
             return dao.getById(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -30,7 +31,7 @@ public class SectionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             SectionDao dao = factory.createSectionDao();
             return dao.getAllByConferenceId(conferenceId);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

@@ -15,6 +15,10 @@ public class ProxyConnection implements Connection {
         this.pool = pool;
     }
 
+    public void returnToPool() throws SQLException {
+        this.setAutoCommit(true);
+        pool.returnConnection(this);
+    }
 
     @Override
     public Statement createStatement() throws SQLException {
@@ -58,7 +62,7 @@ public class ProxyConnection implements Connection {
 
     @Override
     public void close() throws SQLException {
-        pool.returnConnection(this);
+        connection.close();
     }
 
     @Override

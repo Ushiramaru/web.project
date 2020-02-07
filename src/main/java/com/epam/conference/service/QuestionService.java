@@ -1,6 +1,7 @@
 package com.epam.conference.service;
 
 import com.epam.conference.dao.QuestionDao;
+import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.dto.QuestionDto;
@@ -22,7 +23,7 @@ public class QuestionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             QuestionDao dao = factory.createQuestionDao();
             dao.save(item);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -31,7 +32,7 @@ public class QuestionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             QuestionDao dao = factory.createQuestionDao();
             return dao.getAllByUserId(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -40,7 +41,7 @@ public class QuestionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             QuestionDao dao = factory.createQuestionDao();
             return dao.getAll();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -49,7 +50,7 @@ public class QuestionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             QuestionDao dao = factory.createQuestionDao();
             return dao.getById(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -58,7 +59,7 @@ public class QuestionService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             QuestionDao dao = factory.createQuestionDao();
             return dao.getFullInfoById(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

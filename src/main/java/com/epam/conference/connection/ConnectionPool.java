@@ -1,5 +1,7 @@
 package com.epam.conference.connection;
 
+import com.epam.conference.connection.exception.ConnectionPoolRuntimeException;
+
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -23,7 +25,7 @@ public class ConnectionPool {
 
     }
 
-    public static ConnectionPool getInstance() throws SQLException {
+    public static ConnectionPool getInstance() {
         ConnectionPool pool = instance;
         if (pool == null) {
             try {
@@ -41,7 +43,7 @@ public class ConnectionPool {
         return instance;
     }
 
-    private static ConnectionPool build() throws SQLException {
+    private static ConnectionPool build() {
         ResourceBundle resource = ResourceBundle.getBundle("database");
         String poolSize = resource.getString("db.poolSize");
         int poolSizeValue = Integer.parseInt(poolSize);
@@ -52,10 +54,15 @@ public class ConnectionPool {
         pool.connectionsInUse = new ArrayDeque<>(poolSizeValue);
         pool.connectionsSemaphore = new Semaphore(poolSizeValue, true);
 
-        for (int i = 0; i < poolSizeValue; i++) {
-            Queue<ProxyConnection> availableConnections = pool.availableConnections;
-            availableConnections.add(ConnectionFactory.create(pool));
+        try {
+            for (int i = 0; i < poolSizeValue; i++) {
+                Queue<ProxyConnection> availableConnections = pool.availableConnections;
+                availableConnections.add(ConnectionFactory.create(pool));
+            }
+        } catch (SQLException e) {
+            throw new ConnectionPoolRuntimeException(e);
         }
+
 
         return pool;
     }
@@ -73,14 +80,16 @@ public class ConnectionPool {
         }
     }
 
-    public ProxyConnection getConnection() throws InterruptedException {
+    public ProxyConnection getConnection() {
         ProxyConnection connection;
 
-        connectionsSemaphore.acquire();
         try {
+            connectionsSemaphore.acquire();
             connectionsLock.lock();
             connection = availableConnections.poll();
             connectionsInUse.offer(connection);
+        } catch (InterruptedException e) {
+            throw new ConnectionPoolRuntimeException(e);
         } finally {
             connectionsLock.unlock();
         }

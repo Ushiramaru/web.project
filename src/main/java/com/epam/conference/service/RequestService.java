@@ -1,6 +1,7 @@
 package com.epam.conference.service;
 
 import com.epam.conference.dao.RequestDao;
+import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.dto.RequestDto;
@@ -22,7 +23,7 @@ public class RequestService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
             dao.save(request);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -31,7 +32,7 @@ public class RequestService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
             return dao.getById(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -40,7 +41,7 @@ public class RequestService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
             return dao.getAllDtoByUserId(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -49,7 +50,7 @@ public class RequestService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
             dao.removeById(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

@@ -1,11 +1,13 @@
 package com.epam.conference.service;
 
+import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.dao.UserDao;
 import com.epam.conference.entity.User;
 import com.epam.conference.service.exception.ServiceException;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -20,9 +22,13 @@ public class UserService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             UserDao dao = factory.createUserDao();
             return dao.findUserByLoginAndPassword(login, password);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
+    }
+
+    public List<User> getAll() {
+        return null;
     }
 
 }

@@ -2,6 +2,7 @@ package com.epam.conference.service;
 
 import com.epam.conference.dao.AnswerDao;
 import com.epam.conference.dao.QuestionDao;
+import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.dto.AnswerDto;
@@ -22,7 +23,7 @@ public class AnswerService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             AnswerDao dao = factory.createAnswerDao();
             return dao.getFullInfoById(id);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -40,7 +41,7 @@ public class AnswerService {
             QuestionDao questionDao = factory.createQuestionDao();
             questionDao.answer(questionId, answerId);
             factory.endTransaction();
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

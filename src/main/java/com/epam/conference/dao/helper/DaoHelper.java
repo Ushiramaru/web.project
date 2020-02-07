@@ -4,6 +4,7 @@ import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.dao.*;
 import com.epam.conference.dao.exception.DaoException;
+import com.epam.conference.dao.exception.DaoRuntimeException;
 import com.epam.conference.dao.impl.*;
 
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ public class DaoHelper implements AutoCloseable {
 
     private ProxyConnection connection;
 
-    public DaoHelper(ConnectionPool pool) throws InterruptedException {
+    public DaoHelper(ConnectionPool pool) {
         this.connection = pool.getConnection();
     }
 
@@ -41,8 +42,12 @@ public class DaoHelper implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
-        connection.close();
+    public void close() throws DaoException {
+        try {
+            connection.returnToPool();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
     public void startTransaction() throws DaoException {
@@ -53,14 +58,16 @@ public class DaoHelper implements AutoCloseable {
         }
     }
 
-    public void endTransaction() throws DaoException, SQLException {
+    public void endTransaction() throws DaoException {
         try {
             connection.commit();
         } catch (SQLException e) {
-            connection.rollback();
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                throw new DaoRuntimeException(ex);
+            }
             throw new DaoException(e);
-        } finally {
-            connection.setAutoCommit(true);
         }
     }
 
