@@ -33,6 +33,12 @@ public class CommandFactory {
                 return new AnswerPageCommand(new QuestionService(new DaoHelperFactory()));
             case "logout":
                 return new LogoutCommand();
+            case "requestAdmin":
+                return new RequestAdminCommand(new RequestService(new DaoHelperFactory()));
+            case "requestReject":
+                return new RequestRejectCommand(new RequestService(new DaoHelperFactory()));
+            case "requestAccept":
+                return new RequestAcceptCommand(new RequestService(new DaoHelperFactory()));
             case "conferenceAdmin":
                 return new ConferenceAdminCommand(new ConferenceService(new DaoHelperFactory()));
             case "conferenceUnblock":

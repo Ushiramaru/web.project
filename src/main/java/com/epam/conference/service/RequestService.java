@@ -19,6 +19,24 @@ public class RequestService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
+    public void rejectById(Long id) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            RequestDao dao = factory.createRequestDao();
+            dao.rejectById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void acceptById(Long id) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            RequestDao dao = factory.createRequestDao();
+            dao.acceptById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public void save(Request request) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
@@ -41,6 +59,15 @@ public class RequestService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
             return dao.getAllDtoByUserId(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public List<RequestDto> getAllDto()  throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            RequestDao dao = factory.createRequestDao();
+            return dao.getAllDto();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
