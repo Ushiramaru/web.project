@@ -1,10 +1,12 @@
 package com.epam.conference.service;
 
 import com.epam.conference.dao.ConferenceDao;
+import com.epam.conference.dao.SectionDao;
 import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.entity.Conference;
+import com.epam.conference.entity.Section;
 import com.epam.conference.service.exception.ServiceException;
 
 import java.util.List;
@@ -58,6 +60,24 @@ public class ConferenceService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             ConferenceDao dao = factory.createConferenceDao();
             return dao.getById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public Long create(Conference conference, List<Section> sections) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            factory.startTransaction();
+            ConferenceDao conferenceDao = factory.createConferenceDao();
+            Long conferenceId = conferenceDao.save(conference);
+
+            SectionDao sectionDao = factory.createSectionDao();
+            for (Section section : sections) {
+                sectionDao.save(new Section(null, conferenceId, section.getTopic()));
+            }
+            factory.endTransaction();
+
+            return conferenceId;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

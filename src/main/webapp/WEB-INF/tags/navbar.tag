@@ -23,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="controller?command=userAdmin">Пользователи</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="controller?command=createConferencePage">Создать конференцию</a>
+                    </li>
                 </c:when>
                 <c:when test="${user.role eq 'USER'}">
                     <li class="nav-item">

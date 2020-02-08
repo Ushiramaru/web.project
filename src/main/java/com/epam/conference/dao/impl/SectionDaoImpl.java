@@ -7,12 +7,11 @@ import com.epam.conference.mapper.impl.entity.SectionRowMapper;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Objects;
 
 public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
 
-    private static final String FIND_BY_CONFERENCE_ID = "select * from section where conference_id = ?";
     private static final String SAVE_QUERY = "insert into section (conference_id, topic) VALUES (?, ?)";
+    private static final String FIND_BY_CONFERENCE_ID = "select * from section where conference_id = ?";
     private static final String EDIT_BY_ID_QUERY = "update section set topic = ? where id = ?";
 
     public SectionDaoImpl(Connection connection) {

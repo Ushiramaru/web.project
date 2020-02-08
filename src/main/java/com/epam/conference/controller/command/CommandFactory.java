@@ -9,6 +9,8 @@ public class CommandFactory {
 
     public static Command create(String command) throws ServiceException {
         switch (command) {
+            case "logout":
+                return new LogoutCommand();
             case "askPage":
                 return new ShowPageCommand("/WEB-INF/ask.jsp");
             case "loginPage":
@@ -17,6 +19,8 @@ public class CommandFactory {
                 return new ShowPageCommand("/WEB-INF/success.jsp");
             case "mainPage":
                 return new ShowPageCommand("/WEB-INF/main.jsp");
+            case "createConferencePage":
+                return new ShowPageCommand("/WEB-INF/createConferencePage.jsp");
             case "userAdmin":
                 return new UserAdminCommand(new UserService(new DaoHelperFactory()));
             case "login":
@@ -31,8 +35,6 @@ public class CommandFactory {
                 return new AnswerAdminCommand(new AnswerService(new DaoHelperFactory()));
             case "answerPage":
                 return new AnswerPageCommand(new QuestionService(new DaoHelperFactory()));
-            case "logout":
-                return new LogoutCommand();
             case "requestAdmin":
                 return new RequestAdminCommand(new RequestService(new DaoHelperFactory()));
             case "requestReject":
@@ -47,24 +49,26 @@ public class CommandFactory {
                 return new ConferenceBlockCommand(new ConferenceService(new DaoHelperFactory()));
             case "sectionEdit":
                 return new SectionEditCommand(new SectionService(new DaoHelperFactory()));
-            case "conferenceInfoAdmin":
-                return new ConferenceInfoAdminCommand(new ConferenceService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
             case "applyPage":
                 return new ApplyPageCommand(new SectionService(new DaoHelperFactory()));
-            case "apply":
-                return new ApplyCommand(new RequestService(new DaoHelperFactory()));
             case "request":
                 return new RequestCommand(new RequestService(new DaoHelperFactory()));
             case "cancelRequest":
                 return new CancelRequestCommand(new RequestService(new DaoHelperFactory()));
+            case "createConference":
+                return new CreateConferenceCommand(new ConferenceService(new DaoHelperFactory()));
             case "conference":
                 return new ConferenceCommand(new ConferenceService(new DaoHelperFactory()));
-            case "conferenceInfo":
-                return new ConferenceInfoCommand(new SectionService(new DaoHelperFactory()), new ConferenceService(new DaoHelperFactory()));
             case "question":
                 return new QuestionCommand(new QuestionService(new DaoHelperFactory()));
             case "questionAdmin":
                 return new QuestionAdminCommand(new QuestionService(new DaoHelperFactory()));
+            case "conferenceInfoAdmin":
+                return new ConferenceInfoAdminCommand(new ConferenceService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
+            case "apply":
+                return new ApplyCommand(new RequestService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
+            case "conferenceInfo":
+                return new ConferenceInfoCommand(new SectionService(new DaoHelperFactory()), new ConferenceService(new DaoHelperFactory()));
             case "answer":
                 return new AnswerCommand(new AnswerService(new DaoHelperFactory()), new QuestionService(new DaoHelperFactory()));
             default:

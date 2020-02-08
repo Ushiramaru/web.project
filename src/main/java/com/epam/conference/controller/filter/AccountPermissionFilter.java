@@ -31,6 +31,8 @@ public class AccountPermissionFilter implements Filter {
         commandRoleMap.put("requestAdmin", userRoles);
         commandRoleMap.put("requestReject", userRoles);
         commandRoleMap.put("requestAccept", userRoles);
+        commandRoleMap.put("createConferencePage", userRoles);
+        commandRoleMap.put("createConference", userRoles);
 
         userRoles = new ArrayList<>(Collections.singletonList(UserRole.USER));
         commandRoleMap.put("applyPage", userRoles);
