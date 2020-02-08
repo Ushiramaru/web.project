@@ -33,6 +33,16 @@ public class CommandFactory {
                 return new AnswerPageCommand(new QuestionService(new DaoHelperFactory()));
             case "logout":
                 return new LogoutCommand();
+            case "conferenceAdmin":
+                return new ConferenceAdminCommand(new ConferenceService(new DaoHelperFactory()));
+            case "conferenceUnblock":
+                return new ConferenceUnblockCommand(new ConferenceService(new DaoHelperFactory()));
+            case "conferenceBlock":
+                return new ConferenceBlockCommand(new ConferenceService(new DaoHelperFactory()));
+            case "sectionEdit":
+                return new SectionEditCommand(new SectionService(new DaoHelperFactory()));
+            case "conferenceInfoAdmin":
+                return new ConferenceInfoAdminCommand(new ConferenceService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
             case "applyPage":
                 return new ApplyPageCommand(new SectionService(new DaoHelperFactory()));
             case "apply":

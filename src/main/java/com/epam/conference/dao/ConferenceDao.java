@@ -9,4 +9,8 @@ public interface ConferenceDao extends Dao<Conference> {
 
     List<Conference> getAllRelevant() throws DaoException;
 
+    void blockById(Long id) throws DaoException;
+
+    void unblockById(Long id) throws DaoException;
+
 }

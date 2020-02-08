@@ -11,8 +11,9 @@ import java.util.Optional;
 
 public class ConferenceDaoImpl extends AbstractDao<Conference> implements ConferenceDao {
 
-    private static final String SAVE_QUERY = "insert into conference (name, start_date, end_date, img) VALUES ('?', '?', '?', '?')";
+    private static final String SAVE_QUERY = "insert into conference (name, start_date, end_date) VALUES ('?', '?', '?')";
     private static final String GET_ALL_BY_RELEVANT_QUERY = "select * from conference where is_relevant = ?";
+    private static final String SET_RELEVANT_QUERY = "update conference set is_relevant = ? where id = ?";
 
     public ConferenceDaoImpl(Connection connection) {
         super(connection);
@@ -21,6 +22,16 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     @Override
     public Optional<Conference> getById(Long id) throws DaoException {
         return super.getById(id);
+    }
+
+    @Override
+    public void blockById(Long id) throws DaoException {
+        super.executeUpdateQuery(SET_RELEVANT_QUERY, false, id);
+    }
+
+    @Override
+    public void unblockById(Long id) throws DaoException {
+        super.executeUpdateQuery(SET_RELEVANT_QUERY, true, id);
     }
 
     @Override
@@ -45,7 +56,7 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
 
     @Override
     public Long save(Conference item) throws DaoException {
-        return super.executeUpdateQuery(SAVE_QUERY, item.getName(), item.getStartDate(), item.getEndDate(), item.getImagePath());
+        return super.executeUpdateQuery(SAVE_QUERY, item.getName(), item.getStartDate(), item.getEndDate());
     }
 
 }

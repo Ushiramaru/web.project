@@ -27,6 +27,24 @@ public class ConferenceService {
         }
     }
 
+    public void blockById(Long id) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            ConferenceDao dao = factory.createConferenceDao();
+            dao.blockById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void unblockById(Long id) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            ConferenceDao dao = factory.createConferenceDao();
+            dao.unblockById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     public List<Conference> getAllRelevant() throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             ConferenceDao dao = factory.createConferenceDao();

@@ -9,4 +9,6 @@ public interface SectionDao extends Dao<Section> {
 
     List<Section> getAllByConferenceId(Long id) throws DaoException;
 
+    void editById(Long sectionId, Object... params) throws DaoException;
+
 }

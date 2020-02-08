@@ -61,4 +61,13 @@ public class SectionService {
         }
     }
 
+    public void editById(Long id, Object... params) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            SectionDao dao = factory.createSectionDao();
+            dao.editById(id, params);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 }
