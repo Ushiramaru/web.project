@@ -16,9 +16,8 @@ public class ConferenceRowMapper implements RowMapper<Conference> {
         Date startDate = resultSet.getTimestamp(Conference.START_DATE);
         Date endDate = resultSet.getTimestamp(Conference.END_DATE);
         boolean isRelevant = resultSet.getBoolean(Conference.IS_RELEVANT);
-        String imagePath = resultSet.getString(Conference.IMG);
 
-        return new Conference(id, name, startDate, endDate, isRelevant, imagePath);
+        return new Conference(id, name, startDate, endDate, isRelevant);
     }
 
 }
