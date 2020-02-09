@@ -1,16 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8" language="java" isELIgnored="false" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
+<fmt:setLocale value="${language}" scope="session"/>
+<fmt:setBundle basename="locale" var="locale"/>
+<%--    TODO title <fmt:message key="title.applyPage" bundle="${locale}"/>--%>
 <u:htmlBase title="Apply Page">
     <jsp:useBean id="section" scope="request" type="com.epam.conference.entity.Section"/>
     <label><c:out value="${section.topic}"/></label>
     <form action="controller" method="post">
         <input name="command" value="apply" type="hidden">
         <input name="section_id" value="<c:out value="${section.id}"/>" type="hidden">
-        <label>Тема доклада:
+        <label><fmt:message key="label.topic" bundle="${locale}"/>:
             <input name="topic" value="" type="text">
         </label>
-        <input type="submit" value="Apply">
+        <input type="submit" value="<fmt:message key="submit.apply" bundle="${locale}"/>">
     </form>
 </u:htmlBase>

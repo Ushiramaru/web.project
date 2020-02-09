@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class LoginCommand implements Command {
 
@@ -28,6 +29,9 @@ public class LoginCommand implements Command {
         CommandResult result;
         String attributeName;
         Object attributeValue;
+        HttpSession session = request.getSession();
+        String locale = (String) session.getAttribute("language");
+        ResourceBundle language = ResourceBundle.getBundle("locale_" + locale);
         boolean isLogin = false;
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -37,14 +41,13 @@ public class LoginCommand implements Command {
                 attributeValue = user;
             } else {
                 attributeName = "wrong";
-                attributeValue = "Данный аккаунт заблокирован";
+                attributeValue = language.getString("warn.userBlock");
             }
         } else {
             attributeName = "wrong";
-            attributeValue = "Неверный логин или пароль";
+            attributeValue = language.getString("warn.wrongUserData");
         }
 
-        HttpSession session = request.getSession();
         session.setAttribute(attributeName, attributeValue);
         if (isLogin) {
             session.removeAttribute("wrong");
