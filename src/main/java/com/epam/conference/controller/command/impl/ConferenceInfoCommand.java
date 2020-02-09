@@ -31,6 +31,7 @@ public class ConferenceInfoCommand implements Command {
         if (!optionalConference.isPresent()) {
             throw new ServiceException("Specified conference doesn't exist");
         }
+
         Conference conference = optionalConference.get();
         if (!conference.isRelevant()) {
             throw new ServiceException("Specified conference doesn't relevant");
@@ -39,7 +40,6 @@ public class ConferenceInfoCommand implements Command {
 
         List<Section> sections = sectionService.getAllByConferenceId(conferenceId);
         request.setAttribute("sections", sections);
-
 
         return CommandResult.forward("/WEB-INF/conferenceInfo.jsp");
     }

@@ -25,7 +25,7 @@ public class RequestCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<RequestDto> requests = requestService.getAllByUserId(user.getId());
+        List<RequestDto> requests = requestService.getAllDtoByUserId(user.getId());
         request.setAttribute("requests", requests);
 
         return CommandResult.forward("/WEB-INF/userRequest.jsp");

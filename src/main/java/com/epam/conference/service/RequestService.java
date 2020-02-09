@@ -55,7 +55,7 @@ public class RequestService {
         }
     }
 
-    public List<RequestDto> getAllByUserId(Long id)  throws ServiceException {
+    public List<RequestDto> getAllDtoByUserId(Long id)  throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
             return dao.getAllDtoByUserId(id);

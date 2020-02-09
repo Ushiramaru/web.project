@@ -13,8 +13,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from user where login = ? and password = MD5(?)";
     private static final String SAVE_QUERY = "insert into user (login, password, name) VALUES ('?', MD5('?'), '?')";
-    private static final String BLOCK_QUERY = "update user set is_active = false where id = ?";
-    private static final String UNBLOCK_QUERY = "update user set is_active = true where id = ?";
+    private static final String SET_IS_ACTIVE_QUERY = "update user set is_active = ? where id = ?";
 
     public UserDaoImpl(Connection connection) {
         super(connection);
@@ -30,12 +29,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public void blockById(Long id) throws DaoException {
-        super.executeUpdateQuery(BLOCK_QUERY, id);
+        super.executeUpdateQuery(SET_IS_ACTIVE_QUERY, false, id);
     }
 
     @Override
     public void unblockById(Long id) throws DaoException {
-        super.executeUpdateQuery(UNBLOCK_QUERY, id);
+        super.executeUpdateQuery(SET_IS_ACTIVE_QUERY, true, id);
     }
 
     @Override
