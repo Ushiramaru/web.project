@@ -1,5 +1,6 @@
 package com.epam.conference.controller;
 
+import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandFactory;
 import com.epam.conference.controller.command.CommandResult;
@@ -7,7 +8,6 @@ import com.epam.conference.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,15 +17,6 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(Controller.class);
-
-    public void destroy() {
-
-    }
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandResult commandResult;
@@ -50,6 +41,11 @@ public class Controller extends HttpServlet {
         }
     }
 
+    protected void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        dispatcher.forward(request, response);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -58,9 +54,8 @@ public class Controller extends HttpServlet {
         processRequest(request, response);
     }
 
-    protected void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        dispatcher.forward(request, response);
+    public void destroy() {
+        ConnectionPool.getInstance().shutDown();
     }
 
 }

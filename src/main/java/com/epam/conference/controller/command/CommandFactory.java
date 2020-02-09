@@ -18,7 +18,8 @@ public class CommandFactory {
             case "success":
                 return new ShowPageCommand("/WEB-INF/success.jsp");
             case "mainPage":
-                return new ShowPageCommand("/WEB-INF/main.jsp");
+//                return new ShowPageCommand("/WEB-INF/main.jsp");
+                return new ShowPageCommand("/WEB-INF/s.jsp");
             case "createConferencePage":
                 return new ShowPageCommand("/WEB-INF/createConferencePage.jsp");
             case "userAdmin":

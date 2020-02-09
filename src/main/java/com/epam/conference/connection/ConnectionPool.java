@@ -57,10 +57,12 @@ public class ConnectionPool {
         pool.connectionsInUse = new ArrayDeque<>(poolSizeValue);
         pool.connectionsSemaphore = new Semaphore(poolSizeValue, true);
 
+        ConnectionFactory factory = new ConnectionFactory();
         try {
             for (int i = 0; i < poolSizeValue; i++) {
                 Queue<ProxyConnection> availableConnections = pool.availableConnections;
-                availableConnections.add(ConnectionFactory.create(pool));
+                ProxyConnection proxyConnection = new ProxyConnection(factory.create(), pool);
+                availableConnections.add(proxyConnection);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
@@ -100,6 +102,20 @@ public class ConnectionPool {
         }
 
         return connection;
+    }
+
+    public void shutDown() {
+        try {
+            for (ProxyConnection connection : availableConnections) {
+                connection.close();
+            }
+            for (ProxyConnection connection : connectionsInUse) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new ConnectionPoolException(e);
+        }
     }
 
 }
