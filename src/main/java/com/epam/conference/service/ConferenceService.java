@@ -78,10 +78,10 @@ public class ConferenceService {
                     sectionDao.save(new Section(null, conferenceId, section.getTopic()));
                 }
             } catch (DaoException e) {
-                factory.endTransactionWithException();
+                factory.rollback();
                 throw e;
             }
-            factory.endTransaction();
+            factory.commit();
 
             return conferenceId;
         } catch (DaoException e) {

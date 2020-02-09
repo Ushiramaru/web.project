@@ -42,10 +42,10 @@ public class AnswerService {
                 QuestionDao questionDao = factory.createQuestionDao();
                 questionDao.answer(questionId, answerId);
             } catch (DaoException e) {
-                factory.endTransactionWithException();
+                factory.rollback();
                 throw e;
             }
-            factory.endTransaction();
+            factory.commit();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

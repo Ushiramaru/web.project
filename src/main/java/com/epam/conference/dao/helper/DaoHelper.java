@@ -57,7 +57,7 @@ public class DaoHelper implements AutoCloseable {
         }
     }
 
-    public void endTransaction() throws DaoException {
+    public void commit() throws DaoException {
         try {
             try {
                 connection.commit();
@@ -73,7 +73,7 @@ public class DaoHelper implements AutoCloseable {
         }
     }
 
-    public void endTransactionWithException() throws DaoException {
+    public void rollback() throws DaoException {
         try {
             connection.rollback();
             connection.setAutoCommit(true);
