@@ -1,6 +1,7 @@
 package com.epam.conference.connection;
 
-import com.epam.conference.connection.exception.ConnectionPoolRuntimeException;
+import com.epam.conference.connection.exception.ConnectionPoolException;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayDeque;
@@ -12,7 +13,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private static final Lock LOCK = new ReentrantLock();
+    private final static Logger LOGGER = Logger.getLogger(ConnectionFactory.class);
+
+    private final static Lock LOCK = new ReentrantLock();
     private static ConnectionPool instance;
 
     private Queue<ProxyConnection> availableConnections;
@@ -60,7 +63,8 @@ public class ConnectionPool {
                 availableConnections.add(ConnectionFactory.create(pool));
             }
         } catch (SQLException e) {
-            throw new ConnectionPoolRuntimeException(e);
+            LOGGER.error(e);
+            throw new ConnectionPoolException(e);
         }
 
 
@@ -89,7 +93,8 @@ public class ConnectionPool {
             connection = availableConnections.poll();
             connectionsInUse.offer(connection);
         } catch (InterruptedException e) {
-            throw new ConnectionPoolRuntimeException(e);
+            LOGGER.error(e);
+            throw new ConnectionPoolException(e);
         } finally {
             connectionsLock.unlock();
         }

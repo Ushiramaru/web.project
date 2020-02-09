@@ -4,12 +4,15 @@ import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.connection.ProxyConnection;
 import com.epam.conference.dao.*;
 import com.epam.conference.dao.exception.DaoException;
-import com.epam.conference.dao.exception.DaoRuntimeException;
+import com.epam.conference.dao.exception.DaoTransactionException;
 import com.epam.conference.dao.impl.*;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable {
+
+    private final static Logger LOGGER = Logger.getLogger(DaoHelper.class);
 
     private ProxyConnection connection;
 
@@ -65,7 +68,8 @@ public class DaoHelper implements AutoCloseable {
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            throw new DaoRuntimeException(e);
+            LOGGER.error(e);
+            throw new DaoTransactionException(e);
         }
     }
 

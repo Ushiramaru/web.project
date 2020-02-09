@@ -1,22 +1,39 @@
 package com.epam.conference.connection;
 
+import com.epam.conference.connection.exception.ConnectionPoolException;
+import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.util.Properties;
 
 public class ConnectionFactory {
 
-    public static ProxyConnection create(ConnectionPool pool) throws SQLException {
-        ResourceBundle resource = ResourceBundle.getBundle("database");
-        String url = resource.getString("db.url");
-        String user = resource.getString("db.user");
-        String pass = resource.getString("db.password");
+    private final static Logger LOGGER = Logger.getLogger(ConnectionFactory.class);
 
-        DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-        Connection connection = DriverManager.getConnection(url, user, pass);
+    private final String url;
+    private final String user;
+    private final String pass;
 
-        return new ProxyConnection(connection, pool);
+    public ConnectionFactory() {
+        try (InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream("database.properties")) {
+            Properties properties = new Properties();
+            properties.load(input);
+            url = properties.getProperty("db.url");
+            user = properties.getProperty("db.user");
+            pass = properties.getProperty("db.password");
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+        } catch (SQLException | IOException e) {
+            LOGGER.error(e);
+            throw new ConnectionPoolException(e);
+        }
+    }
+
+    public Connection create() throws SQLException {
+        return DriverManager.getConnection(url, user, pass);
     }
 
 }
