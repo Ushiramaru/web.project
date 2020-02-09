@@ -4,13 +4,11 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.createConferencePage" bundle="${locale}"/>--%>
-<u:htmlBase title="Create Conference Page">
+<fmt:message key="title.createConferencePage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-            <%@ include file="./js/addNewSectionForm.js" %>
-        </script>
+        <script src="${pageContext.request.contextPath}/js/addNewSectionForm.js"></script>
         <div class="container p-4">
             <form action="controller" method="post">
                 <input type="hidden" name="command" value="createConference">

@@ -4,8 +4,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.applyPage" bundle="${locale}"/>--%>
-<u:htmlBase title="Apply Page">
+<fmt:message key="title.applyPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <jsp:useBean id="section" scope="request" type="com.epam.conference.entity.Section"/>
     <label><c:out value="${section.topic}"/></label>
     <form action="controller" method="post">

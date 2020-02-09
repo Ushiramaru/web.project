@@ -4,8 +4,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.conferencesPage" bundle="${locale}"/>--%>
-<u:htmlBase title="Conferences Page">
+<fmt:message key="title.conferencesPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <div class="container p-4">
             <c:forEach var="conference" items="${requestScope.conferences}">

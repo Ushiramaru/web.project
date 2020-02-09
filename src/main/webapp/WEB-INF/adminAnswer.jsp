@@ -4,8 +4,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.answerAdminPage" bundle="${locale}"/>--%>
-<u:htmlBase title="AnswerAdmin Page">
+<fmt:message key="title.answerAdminPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <jsp:useBean id="question" scope="request" type="com.epam.conference.dto.QuestionDto"/>
         <div class="card mt-2 text-success" style="background-color: darkred; color: yellowgreen">

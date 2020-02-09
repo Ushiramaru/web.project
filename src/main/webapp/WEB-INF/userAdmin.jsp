@@ -4,8 +4,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.usersAdminPage" bundle="${locale}"/>--%>
-<u:htmlBase title="Users Administration Page">
+<fmt:message key="title.usersAdminPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <table>
             <thead>
@@ -21,8 +21,12 @@
                     <td><c:out value="${user.name}"/></td>
                     <td>
                         <c:choose>
-                            <c:when test="${user.role eq 'ADMINISTRATOR'}"><fmt:message key="label.roleAdmin" bundle="${locale}"/></c:when>
-                            <c:when test="${user.role eq 'USER'}"><fmt:message key="label.roleUser" bundle="${locale}"/></c:when>
+                            <c:when test="${user.role eq 'ADMINISTRATOR'}">
+                                <fmt:message key="label.roleAdmin" bundle="${locale}"/>
+                            </c:when>
+                            <c:when test="${user.role eq 'USER'}">
+                                <fmt:message key="label.roleUser" bundle="${locale}"/>
+                            </c:when>
                         </c:choose>
                     </td>
                     <td>
@@ -30,13 +34,11 @@
                             <c:choose>
                                 <c:when test="${user.active}">
                                     <c:set var="command" value="block"/>
-<%--                                    TODO value <fmt:message key="label.block" bundle="${locale}"/>--%>
-                                    <c:set var="commandName" value="Заблокировать"/>
+                                    <fmt:message key="label.block" bundle="${locale}" var="commandName"/>
                                 </c:when>
                                 <c:when test="${!user.active}">
                                     <c:set var="command" value="unblock"/>
-<%--                                    TODO value <fmt:message key="label.unblock" bundle="${locale}"/>--%>
-                                    <c:set var="commandName" value="Разблокировать"/>
+                                    <fmt:message key="label.unblock" bundle="${locale}" var="commandName"/>
                                 </c:when>
                             </c:choose>
                             <input type="hidden" name="command" value="${command}">

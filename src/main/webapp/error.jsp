@@ -4,7 +4,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.errorPage" bundle="${locale}"/>--%>
+<fmt:message key="title.errorPage" bundle="${locale}" var="title"/>
 <html>
 <head>
     <title>Error</title>

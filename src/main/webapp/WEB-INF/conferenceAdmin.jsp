@@ -4,18 +4,18 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.conferencesAdminPage" bundle="${locale}"/>--%>
-<u:htmlBase title="Conferences Administration Page">
+<fmt:message key="title.conferencesAdminPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <div class="container p-4">
             <table>
                 <thead>
                 <tr>
-                    <th><fmt:message key="label.name" bundle="${locale}"/>Name</th>
-                    <th><fmt:message key="label.startDate" bundle="${locale}"/>Start Date</th>
-                    <th><fmt:message key="label.endDate" bundle="${locale}"/>End Date</th>
-                    <th><fmt:message key="label.info" bundle="${locale}"/>Info</th>
-                    <th><fmt:message key="label.relevant" bundle="${locale}"/>Relevant</th>
+                    <th><fmt:message key="label.name" bundle="${locale}"/></th>
+                    <th><fmt:message key="label.startDate" bundle="${locale}"/></th>
+                    <th><fmt:message key="label.endDate" bundle="${locale}"/></th>
+                    <th><fmt:message key="label.info" bundle="${locale}"/></th>
+                    <th><fmt:message key="label.relevant" bundle="${locale}"/></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,13 +36,11 @@
                                 <c:choose>
                                     <c:when test="${conference.relevant}">
                                         <c:set var="command" value="conferenceBlock"/>
-<%--                                       TODO value <fmt:message key="label.hidden" bundle="${locale}"/>--%>
-                                        <c:set var="commandName" value="Скрыть"/>
+                                        <fmt:message key="label.hidden" bundle="${locale}" var="commandName"/>
                                     </c:when>
                                     <c:when test="${!conference.relevant}">
                                         <c:set var="command" value="conferenceUnblock"/>
-<%--                                       TODO value <fmt:message key="label.unhidden" bundle="${locale}"/>--%>
-                                        <c:set var="commandName" value="Раскрыть"/>
+                                        <fmt:message key="label.unhidden" bundle="${locale}" var="commandName"/>
                                     </c:when>
                                 </c:choose>
                                 <input type="hidden" name="command" value="${command}">

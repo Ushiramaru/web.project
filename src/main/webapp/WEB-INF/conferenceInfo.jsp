@@ -4,8 +4,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.conferenceInfoPage" bundle="${locale}"/>--%>
-<u:htmlBase title="Conference Information Page">
+<fmt:message key="title.conferenceInfoPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <div class="container p-4">
             <div class="card mt-2 text-success" style="background-color: yellow; color: yellowgreen">

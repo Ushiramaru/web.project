@@ -4,8 +4,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" isELIgnored="false" %>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<%--    TODO title <fmt:message key="title.questionPage" bundle="${locale}"/>--%>
-<u:htmlBase title="Question Page">
+<fmt:message key="title.questionPage" bundle="${locale}" var="title"/>
+<u:htmlBase title="${title}">
     <main role="main" class="flex-shrink-0">
         <div class="container p-4">
             <c:forEach var="question" items="${requestScope.questions}">
@@ -13,9 +13,13 @@
                     <div class="card-body">
                         <c:set value="${question.answerId != 0}" var="isAnswered"/>
                         <h5 class="card-title">
-<%--                            TODO value <fmt:message key="label.answered" bundle="${locale}"/>--%>
-<%--                            TODO value <fmt:message key="label.notAnswered" bundle="${locale}"/>--%>
-                            <c:out value="${isAnswered ? 'Answered' : 'Not answered'}"/>
+                            <c:if test="${isAnswered}">
+                                <fmt:message key="label.answered" bundle="${locale}" var="answerState"/>
+                            </c:if>
+                            <c:if test="${!isAnswered}">
+                                <fmt:message key="label.notAnswered" bundle="${locale}" var="answerState"/>
+                            </c:if>
+                            <c:out value="${answerState}"/>
                         </h5>
                         <p class="card-text">
                             <fmt:message key="label.question" bundle="${locale}"/>:<c:out value="${question.content}"/>
