@@ -67,13 +67,19 @@ public class ConferenceService {
 
     public Long create(Conference conference, List<Section> sections) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
-            factory.startTransaction();
-            ConferenceDao conferenceDao = factory.createConferenceDao();
-            Long conferenceId = conferenceDao.save(conference);
+            Long conferenceId;
+            try {
+                factory.startTransaction();
+                ConferenceDao conferenceDao = factory.createConferenceDao();
+                conferenceId = conferenceDao.save(conference);
 
-            SectionDao sectionDao = factory.createSectionDao();
-            for (Section section : sections) {
-                sectionDao.save(new Section(null, conferenceId, section.getTopic()));
+                SectionDao sectionDao = factory.createSectionDao();
+                for (Section section : sections) {
+                    sectionDao.save(new Section(null, conferenceId, section.getTopic()));
+                }
+            } catch (DaoException e) {
+                factory.endTransactionWithException();
+                throw e;
             }
             factory.endTransaction();
 

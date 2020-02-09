@@ -67,7 +67,15 @@ public class DaoHelper implements AutoCloseable {
         } catch (SQLException e) {
             throw new DaoRuntimeException(e);
         }
+    }
 
+    public void endTransactionWithException() throws DaoException {
+        try {
+            connection.rollback();
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
     }
 
 }

@@ -34,12 +34,17 @@ public class AnswerService {
 
     public void answer(Answer item, Long questionId) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
-            factory.startTransaction();
-            AnswerDao answerDao = factory.createAnswerDao();
-            Long answerId = answerDao.save(item);
+            try {
+                factory.startTransaction();
+                AnswerDao answerDao = factory.createAnswerDao();
+                Long answerId = answerDao.save(item);
 
-            QuestionDao questionDao = factory.createQuestionDao();
-            questionDao.answer(questionId, answerId);
+                QuestionDao questionDao = factory.createQuestionDao();
+                questionDao.answer(questionId, answerId);
+            } catch (DaoException e) {
+                factory.endTransactionWithException();
+                throw e;
+            }
             factory.endTransaction();
         } catch (DaoException e) {
             throw new ServiceException(e);
