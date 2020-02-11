@@ -1,7 +1,6 @@
 package com.epam.conference.connection;
 
 import com.epam.conference.connection.exception.ConnectionPoolException;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +10,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionFactory {
-
-    private final static Logger LOGGER = Logger.getLogger(ConnectionFactory.class);
 
     private final String url;
     private final String user;
@@ -27,7 +24,6 @@ public class ConnectionFactory {
             pass = properties.getProperty("db.password");
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         } catch (SQLException | IOException e) {
-            LOGGER.error(e);
             throw new ConnectionPoolException(e);
         }
     }

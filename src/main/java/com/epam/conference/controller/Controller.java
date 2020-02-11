@@ -4,7 +4,6 @@ import com.epam.conference.connection.ConnectionPool;
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandFactory;
 import com.epam.conference.controller.command.CommandResult;
-import com.epam.conference.service.exception.ServiceException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -23,16 +22,13 @@ public class Controller extends HttpServlet {
 
         try {
             String commandName = request.getParameter("command");
-            LOGGER.info(commandName);
 
             Command command = CommandFactory.create(commandName);
             commandResult = command.execute(request, response);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             commandResult = CommandResult.redirect("/error.jsp");
         }
-
-        LOGGER.info(commandResult);
 
         if (commandResult.isRedirect()) {
             response.sendRedirect(commandResult.getPage());

@@ -7,6 +7,7 @@ import com.epam.conference.dao.helper.DaoHelper;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.dto.AnswerDto;
 import com.epam.conference.entity.Answer;
+import com.epam.conference.entity.Question;
 import com.epam.conference.service.exception.ServiceException;
 
 import java.util.Optional;
@@ -23,6 +24,36 @@ public class AnswerService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             AnswerDao dao = factory.createAnswerDao();
             return dao.getFullInfoById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public Optional<AnswerDto> getByQuestionAndUserId(Long questionId, Long userId) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            Optional<AnswerDto> optionalAnswer;
+            try {
+                factory.startTransaction();
+                QuestionDao questionDao = factory.createQuestionDao();
+                Optional<Question> optionalQuestion = questionDao.getById(questionId);
+                if (!optionalQuestion.isPresent()) {
+                    return Optional.empty();
+                }
+                Question question = optionalQuestion.get();
+
+                if (!question.getUserId().equals(userId)) {
+                    return Optional.empty();
+                }
+
+                AnswerDao answerDao = factory.createAnswerDao();
+                optionalAnswer = answerDao.getFullInfoById(question.getAnswerId());
+            } catch (DaoException e) {
+                factory.rollback();
+                throw e;
+            }
+            factory.commit();
+
+            return optionalAnswer;
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

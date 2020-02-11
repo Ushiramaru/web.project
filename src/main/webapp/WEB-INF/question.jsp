@@ -25,7 +25,7 @@
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'USER'}">
                         <c:if test="${isAnswered}">
-                            <form action="controller" method="post">
+                            <form action="controller" method="get">
                                 <input type="hidden" name="command" value="answer">
                                 <input type="hidden" name="question_id" value="<c:out value="${question.id}"/>">
                                 <button class="btn btn-lg btn-primary btn-block btn-custom" type="submit">
@@ -36,7 +36,7 @@
                     </c:when>
                     <c:when test="${sessionScope.user.role eq 'ADMINISTRATOR'}">
                         <c:if test="${!isAnswered}">
-                            <form action="controller" method="post">
+                            <form action="controller" method="get">
                                 <input type="hidden" name="command" value="answerPage">
                                 <input type="hidden" name="question_id" value="<c:out value="${question.id}"/>">
                                 <button class="btn btn-lg btn-primary btn-block btn-custom" type="submit">

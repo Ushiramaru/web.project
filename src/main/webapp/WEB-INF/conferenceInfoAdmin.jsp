@@ -12,12 +12,10 @@
             <h5 class="card-title"><c:out value="${conference.name}"/></h5>
             <p class="card-text">
                 <fmt:message key="label.startDate" bundle="${locale}"/>:
-                <fmt:formatDate value="${conference.startDate}" type="both" dateStyle="short" timeStyle="short"/>
                 <c:out value="${conference.startDate}"/>
             </p>
             <p class="card-text">
                 <fmt:message key="label.endDate" bundle="${locale}"/>:
-                <fmt:formatDate value="${conference.endDate}" type="both" dateStyle="short" timeStyle="short"/>
                 <c:out value="${conference.endDate}"/>
             </p>
         </div>
@@ -27,9 +25,10 @@
             <div class="card-body">
                 <h5 class="card-title"><c:out value="${section.topic}"/></h5>
                 <form class="form-signin" action="controller" method="post">
+<%--                    <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.newTopic" bundle="${locale}"/></h1>--%>
                     <input type="hidden" name="command" value="sectionEdit">
                     <input type="hidden" name="section_id" value="<c:out value="${section.id}"/>">
-                    <textarea maxlength="50" name="content" type="text" class="form-control"
+                    <textarea maxlength="50" name="section_topic" type="text" class="form-control"
                         placeholder="<fmt:message key="label.newTopic" bundle="${locale}"/>" required=""></textarea>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         <fmt:message key="submit.editSection" bundle="${locale}"/>

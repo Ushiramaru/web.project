@@ -43,6 +43,7 @@ body {
 }
 
 .h3, h1 {
+    color: #fff;
     margin-bottom: .5rem;
     font-weight: 500;
     line-height: 1.2;
@@ -188,4 +189,37 @@ button {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.nav-local {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+}
+
+.nav-local {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.nav-local .nav-link {
+    color: rgba(255, 255, 255, .5);
+}
+
+.nav-item {
+    list-style: none;
+    margin: 5px;
+}
+
+.navbar-locale {
+    display: flex;
+}
+
+.bg-dark {
+    background-color: #343a40 !important;
 }

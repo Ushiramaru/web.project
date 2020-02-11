@@ -8,11 +8,12 @@
 <u:htmlBase title="${title}">
     <div class="card mt-2 text-success">
         <div class="card-body">
+            <jsp:useBean id="answer" type="com.epam.conference.dto.AnswerDto" scope="request"/>
             <h5 class="card-title">
-                <fmt:message key="label.answerFrom" bundle="${locale}"/>:<c:out value="${requestScope.answer.administratorName}"/>
+                <fmt:message key="label.answerFrom" bundle="${locale}"/>:<c:out value="${answer.administratorName}"/>
             </h5>
             <p class="card-text">
-                <fmt:message key="label.answer" bundle="${locale}"/>:<c:out value="${requestScope.answer.answerContent}"/>
+                <fmt:message key="label.answer" bundle="${locale}"/>:<c:out value="${answer.answerContent}"/>
             </p>
         </div>
     </div>

@@ -13,7 +13,7 @@
         <input type="hidden" name="command" value="createConference">
         <label class="sr-only"><fmt:message key="label.conferenceName" bundle="${locale}"/></label>
         <input id="inputConferenceName" type="text" name="conference_name" class="form-control"
-               placeholder="<fmt:message key="label.question" bundle="${locale}"/>" required="" autofocus=""/>
+               placeholder="<fmt:message key="label.conferenceName" bundle="${locale}"/>" required="" autofocus=""/>
         <label for="inputStartDate"><fmt:message key="label.startDate" bundle="${locale}"/></label>
         <input id="inputStartDate" type="datetime-local" name="start_date" class="form-control"/>
         <label for="inputEndDate"><fmt:message key="label.endDate" bundle="${locale}"/></label>

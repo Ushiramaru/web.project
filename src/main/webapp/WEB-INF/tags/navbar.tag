@@ -5,8 +5,7 @@
 <fmt:setBundle basename="locale" var="locale"/>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <label class="navbar-brand">Conference</label>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -68,6 +67,28 @@
                     <fmt:message key="nav.exit" bundle="${locale}"/>
                 </a>
             </li>
+            <button id="local-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#localCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="nav-local collapse" id="localCollapse">
+                <c:set value="${requestScope.get('javax.servlet.forward.query_string')}" var="back"/>
+                <jsp:useBean id="back" type="java.lang.String"/>
+                <li class="nav-item">
+                    <a class="nav-link" href="controller?command=language&l=ru_RU&back=<c:out value="${back.replace('&', '__')}"/>">
+                        RU
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="controller?command=language&l=en_EN&back=<c:out value="${back.replace('&', '__')}"/>">
+                        EN
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="controller?command=language&l=by_BY&back=<c:out value="${back.replace('&', '__')}"/>">
+                        BY
+                    </a>
+                </li>
+            </div>
         </ul>
     </div>
 </nav>

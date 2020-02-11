@@ -21,6 +21,7 @@
 <body class="d-flex flex-column h-100">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/collapse.js"></script>
+<script src="${pageContext.request.contextPath}/js/collapseLocal.js"></script>
 <header>
     <u:navbar/>
 </header>

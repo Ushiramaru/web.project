@@ -9,6 +9,8 @@ public class CommandFactory {
 
     public static Command create(String command) throws ServiceException {
         switch (command) {
+            case "language":
+                return new LanguageCommand();
             case "logout":
                 return new LogoutCommand();
             case "askPage":
@@ -18,8 +20,7 @@ public class CommandFactory {
             case "success":
                 return new ShowPageCommand("/WEB-INF/success.jsp");
             case "mainPage":
-//                return new ShowPageCommand("/WEB-INF/main.jsp");
-                return new ShowPageCommand("/WEB-INF/s.jsp");
+                return new ShowPageCommand("/WEB-INF/main.jsp");
             case "createConferencePage":
                 return new ShowPageCommand("/WEB-INF/createConferencePage.jsp");
             case "userAdmin":
@@ -71,7 +72,7 @@ public class CommandFactory {
             case "conferenceInfo":
                 return new ConferenceInfoCommand(new SectionService(new DaoHelperFactory()), new ConferenceService(new DaoHelperFactory()));
             case "answer":
-                return new AnswerCommand(new AnswerService(new DaoHelperFactory()), new QuestionService(new DaoHelperFactory()));
+                return new AnswerCommand(new AnswerService(new DaoHelperFactory()));
             default:
                 throw new ServiceException("Unknown command " + command);
         }

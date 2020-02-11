@@ -13,7 +13,26 @@
     <link href="${pageContext.request.contextPath}/style/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-<form class="form-signin" action="controller" method="post">
+<form class="form-signin bg-dark" action="controller" method="post">
+    <div class="nav-local">
+        <ul class="navbar-locale">
+            <li class="nav-item">
+                <a class="nav-link" href="controller?command=language&l=ru_RU&back=command=loginPage">
+                    RU
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="controller?command=language&l=en_EN&back=command=loginPage">
+                    EN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="controller?command=language&l=by_BY&back=command=loginPage">
+                    BY
+                </a>
+            </li>
+        </ul>
+    </div>
     <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.loginMessage" bundle="${locale}"/></h1>
     <input name="command" value="login" type="hidden">
     <label for="inputLogin" class="sr-only"><fmt:message key="label.login" bundle="${locale}"/></label>

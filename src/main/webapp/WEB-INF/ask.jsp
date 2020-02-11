@@ -10,8 +10,8 @@
             <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.question" bundle="${locale}"/></h1>
             <input name="command" value="ask" type="hidden">
             <label for="inputQuestion" class="sr-only"><fmt:message key="label.question" bundle="${locale}"/></label>
-            <input name="content" type="text" id="inputQuestion" class="form-control"
-                   placeholder="<fmt:message key="label.question" bundle="${locale}"/>" required="" autofocus="">
+            <textarea maxlength="50" name="content" type="text" id="inputQuestion" class="form-control" required="" autofocus="">
+            </textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">
                 <fmt:message key="submit.ask" bundle="${locale}"/>
             </button>

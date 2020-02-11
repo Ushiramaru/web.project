@@ -6,6 +6,7 @@ import com.epam.conference.entity.Conference;
 import com.epam.conference.mapper.impl.entity.ConferenceRowMapper;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +57,7 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
 
     @Override
     public Long save(Conference item) throws DaoException {
-        return super.executeUpdateQuery(SAVE_QUERY, item.getName(), item.getStartDate(), item.getEndDate());
+        return super.executeUpdateQuery(SAVE_QUERY, item.getName(), Timestamp.valueOf(item.getStartDate()), Timestamp.valueOf(item.getEndDate()));
     }
 
 }

@@ -1,6 +1,6 @@
 package com.epam.conference.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Conference implements Identifiable {
 
@@ -13,11 +13,11 @@ public class Conference implements Identifiable {
 
     private final Long id;
     private final String name;
-    private final Date startDate;
-    private final Date endDate;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
     private final boolean isRelevant;
 
-    public Conference(Long id, String name, Date startDate, Date endDate, boolean isRelevant) {
+    public Conference(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, boolean isRelevant) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -34,11 +34,11 @@ public class Conference implements Identifiable {
         return name;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 

@@ -21,7 +21,6 @@ public class QuestionAdminCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        ParameterExtractor extractor = new ParameterExtractor();
         List<Question> questions = questionService.getAll();
         request.setAttribute("questions", questions);
 

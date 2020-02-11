@@ -5,7 +5,7 @@ import com.epam.conference.mapper.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ConferenceRowMapper implements RowMapper<Conference> {
 
@@ -13,8 +13,8 @@ public class ConferenceRowMapper implements RowMapper<Conference> {
     public Conference map(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong(Conference.ID);
         String name = resultSet.getString(Conference.NAME);
-        Date startDate = resultSet.getTimestamp(Conference.START_DATE);
-        Date endDate = resultSet.getTimestamp(Conference.END_DATE);
+        LocalDateTime startDate = resultSet.getTimestamp(Conference.START_DATE).toLocalDateTime();
+        LocalDateTime endDate = resultSet.getTimestamp(Conference.END_DATE).toLocalDateTime();
         boolean isRelevant = resultSet.getBoolean(Conference.IS_RELEVANT);
 
         return new Conference(id, name, startDate, endDate, isRelevant);
