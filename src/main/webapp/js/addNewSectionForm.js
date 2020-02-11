@@ -8,12 +8,14 @@ $(document).ready(() => {
 function registerAddSectionButtonListener() {
     $('#add-section-button').on('click', function () {
         sectionsCount++;
-        let label = document.createElement('label');
-        let input = document.createElement('input');
-        input.setAttribute('name', 'section-topic[]');
-        input.setAttribute('type', 'text');
-        label.innerText = 'Section ' + sectionsCount;
-        label.appendChild(input);
-        $('#sections-div').append(label);
+        let textarea = document.createElement('textarea');
+        textarea.setAttribute('name', 'section-topic[]');
+        textarea.setAttribute('type', 'text');
+        textarea.setAttribute('maxlength', '50');
+        textarea.setAttribute('placeholder', sectionsCount);
+        textarea.setAttribute('required', 'true');
+        $(textarea).addClass('form-control');
+
+        $('#sections-div').append(textarea);
     })
 }

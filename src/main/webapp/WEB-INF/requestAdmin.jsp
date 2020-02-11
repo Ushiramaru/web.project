@@ -6,51 +6,41 @@
 <fmt:setBundle basename="locale" var="locale"/>
 <fmt:message key="title.requestsAdminPage" bundle="${locale}" var="title"/>
 <u:htmlBase title="${title}">
-    <main role="main" class="flex-shrink-0">
-        <div class="container p-4">
-            <table>
-                <thead>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th><fmt:message key="label.requestTopic" bundle="${locale}"/></th>
+                <th><fmt:message key="label.sectionTopic" bundle="${locale}"/></th>
+                <th><fmt:message key="label.conferenceName" bundle="${locale}"/></th>
+                <th class="btn-cell"><fmt:message key="label.state" bundle="${locale}"/></th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="request" items="${requestScope.requests}">
                 <tr>
-                    <th><fmt:message key="label.requestTopic" bundle="${locale}"/></th>
-                    <th><fmt:message key="label.sectionTopic" bundle="${locale}"/></th>
-                    <th><fmt:message key="label.conferenceName" bundle="${locale}"/></th>
-                    <th><fmt:message key="label.state" bundle="${locale}"/></th>
+                    <td><c:out value="${request.requestTopic}"/></td>
+                    <td><c:out value="${request.sectionTopic}"/></td>
+                    <td><c:out value="${request.conferenceName}"/></td>
+                    <td>
+                        <form action="controller" method="post">
+                            <input type="hidden" name="request_id" value="${request.id}">
+                            <input type="hidden" name="command" value="requestReject">
+                            <button class="btn btn-lg btn-primary btn-block btn-table btn-table-multi <c:if test="${request.state eq 'REJECTED'}"><c:out value="choose"/></c:if>" type="submit">
+                                <fmt:message key="submit.reject" bundle="${locale}"/>
+                            </button>
+                        </form>
+                        <form action="controller" method="post">
+                            <input type="hidden" name="request_id" value="${request.id}">
+                            <input type="hidden" name="command" value="requestAccept">
+                            <button class="btn btn-lg btn-primary btn-block btn-table btn-table-multi <c:if test="${request.state eq 'ACCEPTED'}"><c:out value="choose"/></c:if>" type="submit">
+                                <fmt:message key="submit.accept" bundle="${locale}"/>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="request" items="${requestScope.requests}">
-                    <tr>
-                        <td><c:out value="${request.requestTopic}"/></td>
-                        <td><c:out value="${request.sectionTopic}"/></td>
-                        <td><c:out value="${request.conferenceName}"/></td>
-                        <td>
-                            <form action="controller" method="post">
-                                <input type="hidden" name="request_id" value="${request.id}">
-                                <c:choose>
-                                    <c:when test="${request.state eq 'ACCEPTED'}">
-                                        <input type="hidden" name="command" value="requestReject">
-                                        <input type="submit" value="<fmt:message key="submit.reject" bundle="${locale}"/>">
-                                    </c:when>
-                                    <c:when test="${request.state eq 'REJECTED'}">
-                                        <input type="hidden" name="command" value="requestAccept">
-                                        <input type="submit" value="<fmt:message key="submit.accept" bundle="${locale}"/>">
-                                    </c:when>
-                                    <c:when test="${request.state eq 'NOT_REVIEWED'}">
-                                        <label>
-                                            <select name="command" required>
-                                                <option value="requestAccept"><fmt:message key="submit.accept" bundle="${locale}"/></option>
-                                                <option value="requestReject" selected><fmt:message key="submit.reject" bundle="${locale}"/></option>
-                                            </select>
-                                        </label>
-                                        <input type="submit" value="<fmt:message key="submit.setValue" bundle="${locale}"/>">
-                                    </c:when>
-                                </c:choose>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </main>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </u:htmlBase>

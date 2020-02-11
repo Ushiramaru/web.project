@@ -6,11 +6,5 @@
 <fmt:setBundle basename="locale" var="locale"/>
 <fmt:message key="title.mainPage" bundle="${locale}" var="title"/>
 <u:htmlBase title="${title}">
-    <main role="main" class="flex-shrink-0">
-        <div class="container p-4">
-            <p>
-                <fmt:message key="label.welcome" bundle="${locale}"/>
-            </p>
-        </div>
-    </main>
+    <p><fmt:message key="label.welcome" bundle="${locale}"/></p>
 </u:htmlBase>

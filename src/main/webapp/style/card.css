@@ -1,0 +1,33 @@
+.text-success {
+    color: #28a745 !important;
+}
+
+.mt-2, .my-2 {
+    margin-top: .5rem !important;
+}
+
+.card {
+    background-color: darkred;
+    color: yellowgreen;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-title {
+    margin-bottom: .75rem;
+}

@@ -6,30 +6,25 @@
 <fmt:setBundle basename="locale" var="locale"/>
 <fmt:message key="title.createConferencePage" bundle="${locale}" var="title"/>
 <u:htmlBase title="${title}">
-    <main role="main" class="flex-shrink-0">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/addNewSectionForm.js"></script>
-        <div class="container p-4">
-            <form action="controller" method="post">
-                <input type="hidden" name="command" value="createConference">
-                <label><fmt:message key="label.conferenceName" bundle="${locale}"/>:
-                    <input type="text" name="conference_name" value=""/>
-                </label>
-                <label><fmt:message key="label.startDate" bundle="${locale}"/>:
-                    <input type="datetime-local" name="start_date" value=""/>
-                </label>
-                <label><fmt:message key="label.endDate" bundle="${locale}"/>:
-                    <input type="datetime-local" name="end_date" value=""/>
-                </label>
-                <div id="sections-div">
-<%--                    TODO fmt in js--%>
-                    <label>Section 1:
-                        <input type="text" name="section-topic[]"/>
-                    </label>
-                </div>
-                <input type="submit" value="<fmt:message key="submit.create" bundle="${locale}"/>">
-            </form>
-            <button id="add-section-button"><fmt:message key="button.addSection" bundle="${locale}"/></button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/addNewSectionForm.js"></script>
+    <form class="form-signin" action="controller" method="post">
+        <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="title.createConferencePage" bundle="${locale}"/></h1>
+        <input type="hidden" name="command" value="createConference">
+        <label class="sr-only"><fmt:message key="label.conferenceName" bundle="${locale}"/></label>
+        <input id="inputConferenceName" type="text" name="conference_name" class="form-control"
+               placeholder="<fmt:message key="label.question" bundle="${locale}"/>" required="" autofocus=""/>
+        <label for="inputStartDate"><fmt:message key="label.startDate" bundle="${locale}"/></label>
+        <input id="inputStartDate" type="datetime-local" name="start_date" class="form-control"/>
+        <label for="inputEndDate"><fmt:message key="label.endDate" bundle="${locale}"/></label>
+        <input id="inputEndDate" type="datetime-local" name="end_date" class="form-control"/>
+        <button class="btn btn-lg btn-primary btn-block" id="add-section-button" type="button">
+            <fmt:message key="button.addSection" bundle="${locale}"/></button>
+        <div id="sections-div">
+            <textarea maxlength="50" type="text" name="section-topic[]" class="form-control" placeholder="1" required></textarea>
         </div>
-    </main>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            <fmt:message key="submit.create" bundle="${locale}"/>
+        </button>
+    </form>
 </u:htmlBase>

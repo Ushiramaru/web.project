@@ -8,12 +8,14 @@
 <u:htmlBase title="${title}">
     <jsp:useBean id="section" scope="request" type="com.epam.conference.entity.Section"/>
     <label><c:out value="${section.topic}"/></label>
-    <form action="controller" method="post">
+    <form class="form-signin" action="controller" method="post">
         <input name="command" value="apply" type="hidden">
         <input name="section_id" value="<c:out value="${section.id}"/>" type="hidden">
-        <label><fmt:message key="label.topic" bundle="${locale}"/>:
-            <input name="topic" value="" type="text">
-        </label>
-        <input type="submit" value="<fmt:message key="submit.apply" bundle="${locale}"/>">
+        <label for="inputTopic" class="sr-only"><fmt:message key="label.topic" bundle="${locale}"/></label>
+        <textarea maxlength="50" name="content" type="text" id="inputTopic" class="form-control"
+                  placeholder="<fmt:message key="label.topic" bundle="${locale}"/>" required="" autofocus=""></textarea>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            <fmt:message key="submit.apply" bundle="${locale}"/>
+        </button>
     </form>
 </u:htmlBase>

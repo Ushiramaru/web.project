@@ -5,25 +5,31 @@
 <fmt:requestEncoding value="UTF-8"/>
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="locale" var="locale"/>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title><fmt:message key="title.loginPage" bundle="${locale}"/></title>
+    <link href="${pageContext.request.contextPath}/style/signin.css" rel="stylesheet">
 </head>
-<body>
-<form action="controller" method="post">
+<body class="text-center">
+<form class="form-signin" action="controller" method="post">
+    <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.loginMessage" bundle="${locale}"/></h1>
     <input name="command" value="login" type="hidden">
-    <label><fmt:message key="label.login" bundle="${locale}"/>:
-        <input name="login" value="pDestroyer" type="text">
-    </label>
-    <br>
-    <label><fmt:message key="label.password" bundle="${locale}"/>:
-        <input name="password" value="qwert" type="password">
-    </label>
-    <br>
-    <input type="submit" value="<fmt:message key="submit.login" bundle="${locale}"/>">
+    <label for="inputLogin" class="sr-only"><fmt:message key="label.login" bundle="${locale}"/></label>
+    <input name="login" value="pDestroyer" type="text" id="inputLogin" class="form-control"
+           placeholder="<fmt:message key="label.login" bundle="${locale}"/>" required="" autofocus="">
+    <label for="inputPassword" class="sr-only"><fmt:message key="label.password" bundle="${locale}"/></label>
+    <input name="password" value="qwert" type="password" id="inputPassword" class="form-control"
+           placeholder="<fmt:message key="label.password" bundle="${locale}"/>" required="">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+        <fmt:message key="submit.login" bundle="${locale}"/>
+    </button>
+    <c:if test="${sessionScope.containsKey('wrong')}">
+        <p class="mt-5 mb-3 text-muted">
+            <c:out value="${sessionScope.get('wrong')}"/>
+        </p>
+    </c:if>
 </form>
-<c:if test="${sessionScope.containsKey('wrong')}">
-    <label><c:out value="${sessionScope.get('wrong')}"/></label>
-</c:if>
 </body>
 </html>

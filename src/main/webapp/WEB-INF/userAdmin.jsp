@@ -6,13 +6,13 @@
 <fmt:setBundle basename="locale" var="locale"/>
 <fmt:message key="title.usersAdminPage" bundle="${locale}" var="title"/>
 <u:htmlBase title="${title}">
-    <main role="main" class="flex-shrink-0">
-        <table>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
             <thead>
             <tr>
                 <th><fmt:message key="label.name" bundle="${locale}"/></th>
                 <th><fmt:message key="label.role" bundle="${locale}"/></th>
-                <th><fmt:message key="label.isActive" bundle="${locale}"/></th>
+                <th class="btn-cell"><fmt:message key="label.isActive" bundle="${locale}"/></th>
             </tr>
             </thead>
             <tbody>
@@ -43,12 +43,14 @@
                             </c:choose>
                             <input type="hidden" name="command" value="${command}">
                             <input type="hidden" name="user_id" value="${user.id}">
-                            <input type="submit" value="${commandName}">
+                            <button class="btn btn-lg btn-primary btn-block btn-table" type="submit">
+                                <c:out value="${commandName}"/>
+                            </button>
                         </form>
                     </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
-    </main>
+    </div>
 </u:htmlBase>
