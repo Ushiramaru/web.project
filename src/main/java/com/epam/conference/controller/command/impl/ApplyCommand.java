@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.entity.Request;
 import com.epam.conference.entity.Section;
 import com.epam.conference.entity.User;
@@ -26,7 +27,8 @@ public class ApplyCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Long sectionId = Long.valueOf(request.getParameter("section_id"));
+        ParameterExtractor extractor = new ParameterExtractor();
+        Long sectionId = Long.valueOf(extractor.extractParameter(request, "section_id"));
         Optional<Section> optionalSection = sectionService.getRelevantById(sectionId);
         if (!optionalSection.isPresent()) {
             throw new ServiceException("specified section doesn't exist or relevant");
@@ -34,7 +36,7 @@ public class ApplyCommand implements Command {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        String topic = request.getParameter("topic");
+        String topic = extractor.extractParameter(request, "topic");
         Request newRequest = new Request(null, sectionId, user.getId(), topic, null);
         requestService.save(newRequest);
 

@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.dto.AnswerDto;
 import com.epam.conference.entity.Question;
 import com.epam.conference.entity.User;
@@ -16,6 +17,11 @@ import java.util.Optional;
 
 public class AnswerCommand implements Command {
 
+    private static final String USER_ATTRIBUTE_NAME = "user";
+    private static final String QUESTION_ID_PARAMETER_NAME = "question_id";
+    private static final String ANSWER_ATTRIBUTE_NAME = "answer";
+    private static final String JSP = "/WEB-INF/userAnswer.jsp";
+
     private final AnswerService answerService;
     private final QuestionService questionService;
 
@@ -26,10 +32,11 @@ public class AnswerCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        ParameterExtractor extractor = new ParameterExtractor();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        Long questionId = Long.valueOf(request.getParameter("question_id"));
-
+        User user = (User) session.getAttribute(USER_ATTRIBUTE_NAME);
+        Long questionId = Long.valueOf(extractor.extractParameter(request, QUESTION_ID_PARAMETER_NAME));
+//TODO
         Optional<Question> optionalQuestion = questionService.getById(questionId);
         if (!optionalQuestion.isPresent()) {
             throw new ServiceException("You doesn't have permission for this action");
@@ -45,9 +52,9 @@ public class AnswerCommand implements Command {
             throw new ServiceException("Question hasn't answer");
         }
 
-        request.setAttribute("answer", optionalAnswer.get());
+        request.setAttribute(ANSWER_ATTRIBUTE_NAME, optionalAnswer.get());
 
-        return CommandResult.forward("/WEB-INF/userAnswer.jsp");
+        return CommandResult.forward(JSP);
     }
 
 }

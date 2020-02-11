@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.service.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class ShowPageCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        ParameterExtractor extractor = new ParameterExtractor();
         return CommandResult.forward(page);
     }
 

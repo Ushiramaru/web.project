@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.service.ConferenceService;
 import com.epam.conference.service.exception.ServiceException;
 
@@ -18,7 +19,8 @@ public class ConferenceUnblockCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Long unblockUserId = Long.valueOf(request.getParameter("conference_id"));
+        ParameterExtractor extractor = new ParameterExtractor();
+        Long unblockUserId = Long.valueOf(extractor.extractParameter(request,"conference_id"));
         conferenceService.unblockById(unblockUserId);
 
         return CommandResult.redirect("controller?command=conferenceAdmin");

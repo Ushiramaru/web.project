@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.service.UserService;
 import com.epam.conference.service.exception.ServiceException;
 
@@ -18,7 +19,8 @@ public class BlockCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Long blockUserId = Long.valueOf(request.getParameter("user_id"));
+        ParameterExtractor extractor = new ParameterExtractor();
+        Long blockUserId = Long.valueOf(extractor.extractParameter(request, "user_id"));
         userService.blockById(blockUserId);
 
         return CommandResult.redirect("controller?command=userAdmin");

@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.service.RequestService;
 import com.epam.conference.service.exception.ServiceException;
 
@@ -18,7 +19,8 @@ public class RequestAcceptCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Long requestId = Long.valueOf(request.getParameter("request_id"));
+        ParameterExtractor extractor = new ParameterExtractor();
+        Long requestId = Long.valueOf(extractor.extractParameter(request, "request_id"));
         requestService.acceptById(requestId);
 
         return CommandResult.redirect("controller?command=requestAdmin");

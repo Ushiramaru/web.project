@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.entity.Request;
 import com.epam.conference.entity.User;
 import com.epam.conference.service.RequestService;
@@ -22,14 +23,15 @@ public class CancelRequestCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        ParameterExtractor extractor = new ParameterExtractor();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        Long requestId = Long.valueOf(request.getParameter("request_id"));
+        Long requestId = Long.valueOf(extractor.extractParameter(request, "request_id"));
 
         Optional<Request> optionalRequest = requestService.getById(requestId);
 
         if (!optionalRequest.isPresent()) {
-            throw new ServiceException("You doesn't have permission for this action");
+            throw new ServiceException("Record not found");
         }
         Request userRequest = optionalRequest.get();
 

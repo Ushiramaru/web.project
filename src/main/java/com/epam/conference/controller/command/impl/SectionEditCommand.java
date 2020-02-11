@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.entity.Section;
 import com.epam.conference.service.SectionService;
 import com.epam.conference.service.exception.ServiceException;
@@ -20,8 +21,9 @@ public class SectionEditCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Long sectionId = Long.valueOf(request.getParameter("section_id"));
-        String sectionTopic = request.getParameter("section_topic");
+        ParameterExtractor extractor = new ParameterExtractor();
+        Long sectionId = Long.valueOf(extractor.extractParameter(request,"section_id"));
+        String sectionTopic = extractor.extractParameter(request,"section_topic");
 
         Optional<Section> optionalSection = sectionService.getById(sectionId);
         if (!optionalSection.isPresent()) {

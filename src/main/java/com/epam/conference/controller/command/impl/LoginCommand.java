@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.entity.User;
 import com.epam.conference.service.UserService;
 import com.epam.conference.service.exception.ServiceException;
@@ -22,8 +23,9 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        ParameterExtractor extractor = new ParameterExtractor();
+        String login = extractor.extractParameter(request,"login");
+        String password = extractor.extractParameter(request,"password");
         Optional<User> optionalUser = service.login(login, password);
 
         CommandResult result;

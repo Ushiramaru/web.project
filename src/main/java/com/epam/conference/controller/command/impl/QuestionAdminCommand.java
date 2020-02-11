@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.entity.Question;
 import com.epam.conference.service.QuestionService;
 import com.epam.conference.service.exception.ServiceException;
@@ -20,6 +21,7 @@ public class QuestionAdminCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        ParameterExtractor extractor = new ParameterExtractor();
         List<Question> questions = questionService.getAll();
         request.setAttribute("questions", questions);
 

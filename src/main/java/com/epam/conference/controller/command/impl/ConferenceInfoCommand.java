@@ -2,6 +2,7 @@ package com.epam.conference.controller.command.impl;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
+import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.entity.Conference;
 import com.epam.conference.entity.Section;
 import com.epam.conference.service.ConferenceService;
@@ -25,7 +26,8 @@ public class ConferenceInfoCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        Long conferenceId = Long.valueOf(request.getParameter("conference_id"));
+        ParameterExtractor extractor = new ParameterExtractor();
+        Long conferenceId = Long.valueOf(extractor.extractParameter(request,"conference_id"));
 
         Optional<Conference> optionalConference = conferenceService.getById(conferenceId);
         if (!optionalConference.isPresent()) {
