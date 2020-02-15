@@ -1,21 +1,15 @@
 .navbar {
     position: relative;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    -ms-flex-align: center;
     align-items: center;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     padding: .5rem 1rem;
 }
 
 @media (min-width: 768px) {
     .navbar-expand-md {
-        -ms-flex-flow: row nowrap;
         flex-flow: row nowrap;
-        -ms-flex-pack: start;
         justify-content: flex-start;
     }
 
@@ -24,21 +18,16 @@
     }
 
     .navbar-expand-md .navbar-collapse {
-        display: -ms-flexbox !important;
         display: flex !important;
-        -ms-flex-preferred-size: auto;
         flex-basis: auto;
     }
 
     .navbar-expand-md .navbar-nav {
-        -ms-flex-direction: row;
         flex-direction: row;
     }
 
     .navbar-expand-md .navbar-collapse .nav-local {
-        display: -ms-flexbox !important;
         display: flex !important;
-        -ms-flex-preferred-size: auto;
         flex-basis: auto;
     }
 
@@ -49,11 +38,8 @@
 }
 
 .nav-local {
-    -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
-    -ms-flex-positive: 1;
     flex-grow: 1;
-    -ms-flex-align: center;
     align-items: center;
 }
 
@@ -100,11 +86,8 @@
 }
 
 .navbar-collapse {
-    -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
-    -ms-flex-positive: 1;
     flex-grow: 1;
-    -ms-flex-align: center;
     align-items: center;
 }
 
@@ -113,9 +96,7 @@
 }
 
 .navbar-nav {
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
     flex-direction: column;
     padding-left: 0;
     margin-bottom: 0;

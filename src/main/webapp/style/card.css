@@ -10,9 +10,7 @@
     background-color: darkred;
     color: yellowgreen;
     position: relative;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
@@ -22,7 +20,6 @@
 }
 
 .card-body {
-    -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     min-height: 1px;
     padding: 1.25rem;
