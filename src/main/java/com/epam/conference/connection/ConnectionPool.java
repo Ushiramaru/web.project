@@ -15,6 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
 
     private final static Lock LOCK = new ReentrantLock();
+    private final static String DB_POOL_SIZE_KEY = "db.poolSize";
+    private final static String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
     private static ConnectionPool instance;
 
     private Queue<ProxyConnection> availableConnections;
@@ -30,8 +32,8 @@ public class ConnectionPool {
     public static ConnectionPool getInstance() {
         ConnectionPool pool = instance;
         if (pool == null) {
+            LOCK.lock();
             try {
-                LOCK.lock();
                 pool = instance;
                 if (pool == null) {
                     pool = new ConnectionPool();
@@ -47,10 +49,10 @@ public class ConnectionPool {
     }
 
     private void init() {
-        try (InputStream input = ConnectionPool.class.getClassLoader().getResourceAsStream("database.properties")) {
+        try (InputStream input = ConnectionPool.class.getClassLoader().getResourceAsStream(DATABASE_PROPERTIES_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(input);
-            String poolSize = properties.getProperty("db.poolSize");
+            String poolSize = properties.getProperty(DB_POOL_SIZE_KEY);
             int poolSizeValue = Integer.parseInt(poolSize);
             this.initConnections(poolSizeValue);
         } catch (IOException e) {

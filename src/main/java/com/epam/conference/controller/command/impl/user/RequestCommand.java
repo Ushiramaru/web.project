@@ -1,8 +1,7 @@
-package com.epam.conference.controller.command.impl;
+package com.epam.conference.controller.command.impl.user;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
-import com.epam.conference.controller.command.ParameterExtractor;
 import com.epam.conference.dto.RequestDto;
 import com.epam.conference.entity.User;
 import com.epam.conference.service.RequestService;
@@ -15,6 +14,10 @@ import java.util.List;
 
 public class RequestCommand implements Command {
 
+    private final static String USER_ATTRIBUTE_NAME = "user";
+    private final static String REQUESTS_ATTRIBUTE_NAME = "requests";
+    private final static String USER_REQUEST_JSP = "/WEB-INF/userRequest.jsp";
+
     private final RequestService requestService;
 
     public RequestCommand(RequestService requestService) {
@@ -23,14 +26,13 @@ public class RequestCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        ParameterExtractor extractor = new ParameterExtractor();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute(USER_ATTRIBUTE_NAME);
 
         List<RequestDto> requests = requestService.getAllDtoByUserId(user.getId());
-        request.setAttribute("requests", requests);
+        request.setAttribute(REQUESTS_ATTRIBUTE_NAME, requests);
 
-        return CommandResult.forward("/WEB-INF/userRequest.jsp");
+        return CommandResult.forward(USER_REQUEST_JSP);
     }
 
 }

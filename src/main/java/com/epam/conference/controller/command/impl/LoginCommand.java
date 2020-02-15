@@ -15,16 +15,18 @@ import java.util.ResourceBundle;
 
 public class LoginCommand implements Command {
 
-    private static final String LOGIN_PARAMETER_NAME = "login";
-    private static final String PASSWORD_PARAMETER_NAME = "password";
-    private static final String LANGUAGE_ATTRIBUTE_NAME = "language";
-    private static final String LOCALE_BASE_NAME = "locale";
-    private static final String USER_ATTRIBUTE_NAME = "user";
-    private static final String WRONG_ATTRIBUTE_NAME = "wrong";
-    private static final String CONTROLLER_COMMAND_MAIN_PAGE = "controller?command=mainPage";
-    private static final String CONTROLLER_COMMAND_LOGIN_PAGE = "controller?command=loginPage";
-    private static final String WARN_USER_BLOCK_KEY = "warn.userBlock";
-    private static final String WARN_WRONG_USER_DATA_KEY = "warn.wrongUserData";
+    private final static String LOGIN_PARAMETER_NAME = "login";
+    private final static String PASSWORD_PARAMETER_NAME = "password";
+    private final static String LANGUAGE_ATTRIBUTE_NAME = "language";
+    private final static String LOCALE_BASE_NAME = "locale";
+    private final static String USER_ATTRIBUTE_NAME = "user";
+    private final static String WRONG_ATTRIBUTE_NAME = "wrong";
+    private final static String WARN_USER_BLOCK_KEY = "warn.userBlock";
+    private final static String WARN_WRONG_USER_DATA_KEY = "warn.wrongUserData";
+    private final static String PROPERTY_FILE_EXTENSION = ".properties";
+    private final static String LOCALE_DELIMITER = "_";
+    private final static String CONTROLLER_COMMAND_MAIN_PAGE = "controller?command=mainPage";
+    private final static String CONTROLLER_COMMAND_LOGIN_PAGE = "controller?command=loginPage";
 
     private UserService service;
 
@@ -45,10 +47,10 @@ public class LoginCommand implements Command {
         HttpSession session = request.getSession();
         String locale = (String) session.getAttribute(LANGUAGE_ATTRIBUTE_NAME);
         ResourceBundle language;
-        if (LoginCommand.class.getClassLoader().getResource(LOCALE_BASE_NAME + "_" + locale + ".properties") == null) {
+        if (LoginCommand.class.getClassLoader().getResource(LOCALE_BASE_NAME + LOCALE_DELIMITER + locale + PROPERTY_FILE_EXTENSION) == null) {
             language = ResourceBundle.getBundle(LOCALE_BASE_NAME);
         } else {
-            language = ResourceBundle.getBundle(LOCALE_BASE_NAME + "_" + locale);
+            language = ResourceBundle.getBundle(LOCALE_BASE_NAME + LOCALE_DELIMITER + locale);
         }
         boolean isLogin = false;
         if (optionalUser.isPresent()) {

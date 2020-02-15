@@ -1,4 +1,4 @@
-package com.epam.conference.controller.command.impl;
+package com.epam.conference.controller.command.impl.admin;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
@@ -13,9 +13,11 @@ import java.util.Optional;
 
 public class AnswerPageCommand implements Command {
 
-    public static final String QUESTION_ID_PARAMETER_NAME = "question_id";
-    public static final String JSP = "/WEB-INF/adminAnswer.jsp";
-    public static final String QUESTION_ATTRIBUTE_NAME = "question";
+    private final static String QUESTION_ID_PARAMETER_NAME = "question_id";
+    private final static String QUESTION_ATTRIBUTE_NAME = "question";
+    private final static String QUESTION_NOT_FOUND_MESSAGE = "specified question doesn't exist";
+    private final static String ADMIN_ANSWER_JSP = "/WEB-INF/adminAnswer.jsp";
+
     private final QuestionService questionService;
 
     public AnswerPageCommand(QuestionService questionService) {
@@ -26,13 +28,14 @@ public class AnswerPageCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         ParameterExtractor extractor = new ParameterExtractor();
         Long questionId = Long.valueOf(extractor.extractParameter(request, QUESTION_ID_PARAMETER_NAME));
-        Optional<QuestionDto> question = questionService.getFullInfoById(questionId);
+        Optional<QuestionDto> question;
+        question = questionService.getFullInfoById(questionId);
         if (!question.isPresent()) {
-            throw new ServiceException("specified question doesn't exist");
+            throw new ServiceException(QUESTION_NOT_FOUND_MESSAGE);
         }
         request.setAttribute(QUESTION_ATTRIBUTE_NAME, question.get());
 
-        return CommandResult.forward(JSP);
+        return CommandResult.forward(ADMIN_ANSWER_JSP);
     }
 
 }

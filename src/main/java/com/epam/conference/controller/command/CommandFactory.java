@@ -1,11 +1,20 @@
 package com.epam.conference.controller.command;
 
 import com.epam.conference.controller.command.impl.*;
+import com.epam.conference.controller.command.impl.admin.*;
+import com.epam.conference.controller.command.impl.user.*;
 import com.epam.conference.dao.helper.DaoHelperFactory;
 import com.epam.conference.service.*;
 import com.epam.conference.service.exception.ServiceException;
 
 public class CommandFactory {
+
+    private final static String ASK_JSP = "/WEB-INF/ask.jsp";
+    private final static String LOGIN_JSP = "/WEB-INF/login.jsp";
+    private final static String SUCCESS_JSP = "/WEB-INF/success.jsp";
+    private final static String MAIN_JSP = "/WEB-INF/main.jsp";
+    private final static String CREATE_CONFERENCE_PAGE_JSP = "/WEB-INF/createConferencePage.jsp";
+    private final static String UNKNOWN_COMMAND = "Unknown command ";
 
     public static Command create(String command) throws ServiceException {
         switch (command) {
@@ -14,15 +23,15 @@ public class CommandFactory {
             case "logout":
                 return new LogoutCommand();
             case "askPage":
-                return new ShowPageCommand("/WEB-INF/ask.jsp");
+                return new ShowPageCommand(ASK_JSP);
             case "loginPage":
-                return new ShowPageCommand("/WEB-INF/login.jsp");
+                return new ShowPageCommand(LOGIN_JSP);
             case "success":
-                return new ShowPageCommand("/WEB-INF/success.jsp");
+                return new ShowPageCommand(SUCCESS_JSP);
             case "mainPage":
-                return new ShowPageCommand("/WEB-INF/main.jsp");
+                return new ShowPageCommand(MAIN_JSP);
             case "createConferencePage":
-                return new ShowPageCommand("/WEB-INF/createConferencePage.jsp");
+                return new ShowPageCommand(CREATE_CONFERENCE_PAGE_JSP);
             case "userAdmin":
                 return new UserAdminCommand(new UserService(new DaoHelperFactory()));
             case "login":
@@ -65,16 +74,16 @@ public class CommandFactory {
                 return new QuestionCommand(new QuestionService(new DaoHelperFactory()));
             case "questionAdmin":
                 return new QuestionAdminCommand(new QuestionService(new DaoHelperFactory()));
+            case "answer":
+                return new AnswerCommand(new AnswerService(new DaoHelperFactory()));
             case "conferenceInfoAdmin":
                 return new ConferenceInfoAdminCommand(new ConferenceService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
             case "apply":
                 return new ApplyCommand(new RequestService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
             case "conferenceInfo":
                 return new ConferenceInfoCommand(new SectionService(new DaoHelperFactory()), new ConferenceService(new DaoHelperFactory()));
-            case "answer":
-                return new AnswerCommand(new AnswerService(new DaoHelperFactory()));
             default:
-                throw new ServiceException("Unknown command " + command);
+                throw new ServiceException(UNKNOWN_COMMAND + command);
         }
     }
 

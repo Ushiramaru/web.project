@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ShowPageCommand implements Command {
 
-    private String page;
+    private final String page;
 
     public ShowPageCommand(String page) {
         this.page = page;

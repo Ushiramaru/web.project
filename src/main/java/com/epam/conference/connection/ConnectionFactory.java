@@ -11,17 +11,22 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
+    private static final String DB_URL_KEY = "db.url";
+    private static final String DB_USER_KEY = "db.user";
+    private static final String DB_PASSWORD_KEY = "db.password";
+    private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
+
     private final String url;
     private final String user;
     private final String pass;
 
     public ConnectionFactory() {
-        try (InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream("database.properties")) {
+        try (InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream(DATABASE_PROPERTIES_FILE_NAME)) {
             Properties properties = new Properties();
             properties.load(input);
-            url = properties.getProperty("db.url");
-            user = properties.getProperty("db.user");
-            pass = properties.getProperty("db.password");
+            url = properties.getProperty(DB_URL_KEY);
+            user = properties.getProperty(DB_USER_KEY);
+            pass = properties.getProperty(DB_PASSWORD_KEY);
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         } catch (SQLException | IOException e) {
             throw new ConnectionPoolException(e);

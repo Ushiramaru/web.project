@@ -1,4 +1,4 @@
-package com.epam.conference.controller.command.impl;
+package com.epam.conference.controller.command.impl.user;
 
 import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
@@ -17,9 +17,11 @@ import java.util.Optional;
 
 public class ApplyCommand implements Command {
 
-    private static final String USER_ATTRIBUTE_NAME = "user";
-    private static final String TOPIC_PARAMETER_NAME = "topic";
-    private static final String CONTROLLER_COMMAND_SUCCESS = "controller?command=success";
+    private final static String USER_ATTRIBUTE_NAME = "user";
+    private final static String TOPIC_PARAMETER_NAME = "topic";
+    private final static String SECTION_NOT_FOUND_MESSAGE = "specified section doesn't exist or relevant";
+    private final static String SECTION_ID_ATTRIBUTE_NAME = "section_id";
+    private final static String CONTROLLER_COMMAND_SUCCESS = "controller?command=success";
 
     private final RequestService requestService;
     private final SectionService sectionService;
@@ -32,10 +34,11 @@ public class ApplyCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         ParameterExtractor extractor = new ParameterExtractor();
-        Long sectionId = Long.valueOf(extractor.extractParameter(request, "section_id"));
-        Optional<Section> optionalSection = sectionService.getRelevantById(sectionId);
+        Long sectionId = Long.valueOf(extractor.extractParameter(request, SECTION_ID_ATTRIBUTE_NAME));
+        Optional<Section> optionalSection;
+        optionalSection = sectionService.getRelevantById(sectionId);
         if (!optionalSection.isPresent()) {
-            throw new ServiceException("specified section doesn't exist or relevant");
+            throw new ServiceException(SECTION_NOT_FOUND_MESSAGE);
         }
 
         HttpSession session = request.getSession();
