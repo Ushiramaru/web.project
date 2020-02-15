@@ -11,7 +11,7 @@
     <form class="form-signin" action="controller" method="post">
         <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="title.createConferencePage" bundle="${locale}"/></h1>
         <input type="hidden" name="command" value="createConference">
-        <label class="sr-only"><fmt:message key="label.conferenceName" bundle="${locale}"/></label>
+        <label for="inputConferenceName" class="sr-only"><fmt:message key="label.conferenceName" bundle="${locale}"/></label>
         <input id="inputConferenceName" type="text" name="conference_name" class="form-control"
                placeholder="<fmt:message key="label.conferenceName" bundle="${locale}"/>" required="" autofocus=""/>
         <label for="inputStartDate"><fmt:message key="label.startDate" bundle="${locale}"/></label>
@@ -21,7 +21,8 @@
         <button class="btn btn-lg btn-primary btn-block" id="add-section-button" type="button">
             <fmt:message key="button.addSection" bundle="${locale}"/></button>
         <div id="sections-div">
-            <textarea maxlength="50" type="text" name="section-topic[]" class="form-control" placeholder="1" required></textarea>
+            <label for="section-topic-1" id="new-section-label"><fmt:message key="label.section" bundle="${locale}"/> 1</label>
+            <textarea id="section-topic-1" maxlength="50" type="text" name="section-topic[]" class="form-control" placeholder="1" required></textarea>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
             <fmt:message key="submit.create" bundle="${locale}"/>
