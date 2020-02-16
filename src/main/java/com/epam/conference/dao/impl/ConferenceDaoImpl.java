@@ -8,7 +8,6 @@ import com.epam.conference.mapper.impl.entity.ConferenceRowMapper;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 public class ConferenceDaoImpl extends AbstractDao<Conference> implements ConferenceDao {
 
@@ -18,11 +17,6 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
 
     public ConferenceDaoImpl(Connection connection) {
         super(connection);
-    }
-
-    @Override
-    public Optional<Conference> getById(Long id) throws DaoException {
-        return super.getById(id);
     }
 
     @Override
@@ -36,28 +30,18 @@ public class ConferenceDaoImpl extends AbstractDao<Conference> implements Confer
     }
 
     @Override
-    public void removeById(Long id) throws DaoException {
-        super.removeById(id);
-    }
-
-    @Override
-    public List<Conference> getAll() throws DaoException {
-        return super.getAll();
-    }
-
-    @Override
     public List<Conference> getAllRelevant() throws DaoException {
         return super.executeQuery(GET_ALL_BY_RELEVANT_QUERY, new ConferenceRowMapper(), true);
     }
 
     @Override
-    protected String getTableName() {
-        return Conference.TABLE;
+    public Long save(Conference item) throws DaoException {
+        return super.executeUpdateQuery(SAVE_QUERY, item.getName(), Timestamp.valueOf(item.getStartDate()), Timestamp.valueOf(item.getEndDate()));
     }
 
     @Override
-    public Long save(Conference item) throws DaoException {
-        return super.executeUpdateQuery(SAVE_QUERY, item.getName(), Timestamp.valueOf(item.getStartDate()), Timestamp.valueOf(item.getEndDate()));
+    protected String getTableName() {
+        return Conference.TABLE;
     }
 
 }

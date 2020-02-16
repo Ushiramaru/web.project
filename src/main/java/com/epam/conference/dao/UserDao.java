@@ -13,6 +13,4 @@ public interface UserDao extends Dao<User>{
 
     void unblockById(Long id) throws DaoException;
 
-//    TODO void registerUser(String login, String password, String name) throws DaoException;
-
 }

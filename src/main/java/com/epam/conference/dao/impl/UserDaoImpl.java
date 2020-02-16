@@ -6,7 +6,6 @@ import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.entity.User;
 
 import java.sql.Connection;
-import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
@@ -23,10 +22,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         return executeForSingleResult(FIND_BY_LOGIN_AND_PASSWORD, new UserRowMapper(), login, password);
     }
 
-    public Long registerUser(String login, String password, String name) throws DaoException {
-        return super.executeUpdateQuery(SAVE_QUERY, login, password, name);
-    }
-
     @Override
     public void blockById(Long id) throws DaoException {
         super.executeUpdateQuery(SET_IS_ACTIVE_QUERY, false, id);
@@ -35,21 +30,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public void unblockById(Long id) throws DaoException {
         super.executeUpdateQuery(SET_IS_ACTIVE_QUERY, true, id);
-    }
-
-    @Override
-    public Optional<User> getById(Long id) throws DaoException {
-        return super.getById(id);
-    }
-
-    @Override
-    public List<User> getAll() throws DaoException {
-        return super.getAll();
-    }
-
-    @Override
-    public void removeById(Long id) throws DaoException {
-        super.removeById(id);
     }
 
     @Override

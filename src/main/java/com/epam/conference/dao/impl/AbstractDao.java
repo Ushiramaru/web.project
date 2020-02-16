@@ -5,7 +5,6 @@ import com.epam.conference.dto.Dto;
 import com.epam.conference.mapper.RowMapper;
 import com.epam.conference.dao.exception.DaoException;
 import com.epam.conference.entity.Identifiable;
-import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,9 +16,9 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
-    private final static Logger LOGGER = Logger.getLogger(AbstractDao.class);
+    private final static String MORE_THEN_ONE_RECORD_FOUND = "More then one record found";
 
-    private Connection connection;
+    private final Connection connection;
 
     protected AbstractDao(Connection connection) {
         this.connection = connection;
@@ -84,7 +83,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         if (items.size() == 1) {
             return Optional.of(items.get(0));
         } else if (items.size() > 1) {
-            throw new DaoException("More then one record found");
+            throw new DaoException(MORE_THEN_ONE_RECORD_FOUND);
         } else {
             return Optional.empty();
         }
@@ -120,7 +119,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         if (items.size() == 1) {
             return Optional.of(items.get(0));
         } else if (items.size() > 1) {
-            throw new DaoException("More then one record found");
+            throw new DaoException(MORE_THEN_ONE_RECORD_FOUND);
         } else {
             return Optional.empty();
         }

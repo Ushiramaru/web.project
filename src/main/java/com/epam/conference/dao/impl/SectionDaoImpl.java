@@ -20,7 +20,7 @@ public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
 
     @Override
     public List<Section> getAllByConferenceId(Long id) throws DaoException {
-        return executeQuery(FIND_BY_CONFERENCE_ID, new SectionRowMapper(), id);
+        return super.executeQuery(FIND_BY_CONFERENCE_ID, new SectionRowMapper(), id);
     }
 
     @Override
@@ -29,13 +29,13 @@ public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
     }
 
     @Override
-    protected String getTableName() {
-        return Section.TABLE;
+    public Long save(Section item) throws DaoException {
+        return super.executeUpdateQuery(SAVE_QUERY, item.getConferenceId(), item.getTopic());
     }
 
     @Override
-    public Long save(Section item) throws DaoException {
-        return super.executeUpdateQuery(SAVE_QUERY, item.getConferenceId(), item.getTopic());
+    protected String getTableName() {
+        return Section.TABLE;
     }
 
 }

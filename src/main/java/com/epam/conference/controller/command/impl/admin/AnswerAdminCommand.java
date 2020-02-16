@@ -33,7 +33,7 @@ public class AnswerAdminCommand implements Command {
         Long questionId = Long.valueOf(extractor.extractParameter(request, QUESTION_ID_PARAMETER_NAME));
         String content = extractor.extractParameter(request, CONTENT_PARAMETER_NAME);
         Answer answer = new Answer(null, user.getId(), content);
-        answerService.answer(answer, questionId);
+        answerService.save(answer, questionId);
 
         return CommandResult.redirect(CONTROLLER_COMMAND_SUCCESS);
     }

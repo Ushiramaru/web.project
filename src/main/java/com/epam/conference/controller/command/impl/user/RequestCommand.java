@@ -29,7 +29,7 @@ public class RequestCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(USER_ATTRIBUTE_NAME);
 
-        List<RequestDto> requests = requestService.getAllDtoByUserId(user.getId());
+        List<RequestDto> requests = requestService.getAllWithFullInfoByUserId(user.getId());
         request.setAttribute(REQUESTS_ATTRIBUTE_NAME, requests);
 
         return CommandResult.forward(USER_REQUEST_JSP);

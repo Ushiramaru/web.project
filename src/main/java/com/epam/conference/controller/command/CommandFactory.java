@@ -4,8 +4,8 @@ import com.epam.conference.controller.command.impl.*;
 import com.epam.conference.controller.command.impl.admin.*;
 import com.epam.conference.controller.command.impl.user.*;
 import com.epam.conference.dao.helper.DaoHelperFactory;
-import com.epam.conference.service.*;
 import com.epam.conference.service.exception.ServiceException;
+import com.epam.conference.service.impl.*;
 
 public class CommandFactory {
 
@@ -33,55 +33,55 @@ public class CommandFactory {
             case "createConferencePage":
                 return new ShowPageCommand(CREATE_CONFERENCE_PAGE_JSP);
             case "userAdmin":
-                return new UserAdminCommand(new UserService(new DaoHelperFactory()));
+                return new UserAdminCommand(new UserServiceImpl(new DaoHelperFactory()));
             case "login":
-                return new LoginCommand(new UserService(new DaoHelperFactory()));
+                return new LoginCommand(new UserServiceImpl(new DaoHelperFactory()));
             case "ask":
-                return new AskCommand(new QuestionService(new DaoHelperFactory()));
+                return new AskCommand(new QuestionServiceImpl(new DaoHelperFactory()));
             case "block":
-                return new BlockCommand(new UserService(new DaoHelperFactory()));
+                return new BlockCommand(new UserServiceImpl(new DaoHelperFactory()));
             case "unblock":
-                return new UnblockCommand(new UserService(new DaoHelperFactory()));
+                return new UnblockCommand(new UserServiceImpl(new DaoHelperFactory()));
             case "answerAdmin":
-                return new AnswerAdminCommand(new AnswerService(new DaoHelperFactory()));
+                return new AnswerAdminCommand(new AnswerServiceImpl(new DaoHelperFactory()));
             case "answerPage":
-                return new AnswerPageCommand(new QuestionService(new DaoHelperFactory()));
+                return new AnswerPageCommand(new QuestionServiceImpl(new DaoHelperFactory()));
             case "requestAdmin":
-                return new RequestAdminCommand(new RequestService(new DaoHelperFactory()));
+                return new RequestAdminCommand(new RequestServiceImpl(new DaoHelperFactory()));
             case "requestReject":
-                return new RequestRejectCommand(new RequestService(new DaoHelperFactory()));
+                return new RequestRejectCommand(new RequestServiceImpl(new DaoHelperFactory()));
             case "requestAccept":
-                return new RequestAcceptCommand(new RequestService(new DaoHelperFactory()));
+                return new RequestAcceptCommand(new RequestServiceImpl(new DaoHelperFactory()));
             case "conferenceAdmin":
-                return new ConferenceAdminCommand(new ConferenceService(new DaoHelperFactory()));
+                return new ConferenceAdminCommand(new ConferenceServiceImpl(new DaoHelperFactory()));
             case "conferenceUnblock":
-                return new ConferenceUnblockCommand(new ConferenceService(new DaoHelperFactory()));
+                return new ConferenceUnblockCommand(new ConferenceServiceImpl(new DaoHelperFactory()));
             case "conferenceBlock":
-                return new ConferenceBlockCommand(new ConferenceService(new DaoHelperFactory()));
+                return new ConferenceBlockCommand(new ConferenceServiceImpl(new DaoHelperFactory()));
             case "sectionEdit":
-                return new SectionEditCommand(new SectionService(new DaoHelperFactory()));
+                return new SectionEditCommand(new SectionServiceImpl(new DaoHelperFactory()));
             case "applyPage":
-                return new ApplyPageCommand(new SectionService(new DaoHelperFactory()));
+                return new ApplyPageCommand(new SectionServiceImpl(new DaoHelperFactory()));
             case "request":
-                return new RequestCommand(new RequestService(new DaoHelperFactory()));
+                return new RequestCommand(new RequestServiceImpl(new DaoHelperFactory()));
             case "cancelRequest":
-                return new CancelRequestCommand(new RequestService(new DaoHelperFactory()));
+                return new CancelRequestCommand(new RequestServiceImpl(new DaoHelperFactory()));
             case "createConference":
-                return new CreateConferenceCommand(new ConferenceService(new DaoHelperFactory()));
+                return new CreateConferenceCommand(new ConferenceServiceImpl(new DaoHelperFactory()));
             case "conference":
-                return new ConferenceCommand(new ConferenceService(new DaoHelperFactory()));
+                return new ConferenceCommand(new ConferenceServiceImpl(new DaoHelperFactory()));
             case "question":
-                return new QuestionCommand(new QuestionService(new DaoHelperFactory()));
+                return new QuestionCommand(new QuestionServiceImpl(new DaoHelperFactory()));
             case "questionAdmin":
-                return new QuestionAdminCommand(new QuestionService(new DaoHelperFactory()));
+                return new QuestionAdminCommand(new QuestionServiceImpl(new DaoHelperFactory()));
             case "answer":
-                return new AnswerCommand(new AnswerService(new DaoHelperFactory()));
+                return new AnswerCommand(new AnswerServiceImpl(new DaoHelperFactory()));
             case "conferenceInfoAdmin":
-                return new ConferenceInfoAdminCommand(new ConferenceService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
+                return new ConferenceInfoAdminCommand(new ConferenceServiceImpl(new DaoHelperFactory()), new SectionServiceImpl(new DaoHelperFactory()));
             case "apply":
-                return new ApplyCommand(new RequestService(new DaoHelperFactory()), new SectionService(new DaoHelperFactory()));
+                return new ApplyCommand(new RequestServiceImpl(new DaoHelperFactory()), new SectionServiceImpl(new DaoHelperFactory()));
             case "conferenceInfo":
-                return new ConferenceInfoCommand(new SectionService(new DaoHelperFactory()), new ConferenceService(new DaoHelperFactory()));
+                return new ConferenceInfoCommand(new SectionServiceImpl(new DaoHelperFactory()), new ConferenceServiceImpl(new DaoHelperFactory()));
             default:
                 throw new ServiceException(UNKNOWN_COMMAND + command);
         }

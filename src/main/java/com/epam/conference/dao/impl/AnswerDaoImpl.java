@@ -26,13 +26,13 @@ public class AnswerDaoImpl extends AbstractDao<Answer> implements AnswerDao {
     }
 
     @Override
-    protected String getTableName() {
-        return Answer.TABLE;
+    public Long save(Answer item) throws DaoException {
+        return super.executeUpdateQuery(SAVE_QUERY, item.getAdministratorId(), item.getContent());
     }
 
     @Override
-    public Long save(Answer item) throws DaoException {
-        return super.executeUpdateQuery(SAVE_QUERY, item.getAdministratorId(), item.getContent());
+    protected String getTableName() {
+        return Answer.TABLE;
     }
 
 }

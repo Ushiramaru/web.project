@@ -48,7 +48,7 @@ public class CreateConferenceCommand implements Command {
             Section section = new Section(null, null, sectionTopic);
             sections.add(section);
         }
-        Long conferenceId = conferenceService.create(conference, sections);
+        Long conferenceId = conferenceService.save(conference, sections);
 
         return CommandResult.redirect(CONTROLLER_COMMAND_CONFERENCE_INFO_ADMIN_CONFERENCE_ID + conferenceId);
     }

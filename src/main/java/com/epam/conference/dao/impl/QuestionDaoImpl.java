@@ -26,7 +26,7 @@ public class QuestionDaoImpl extends AbstractDao<Question> implements QuestionDa
 
     @Override
     public List<Question> getAllByUserId(Long id) throws DaoException {
-        return executeQuery(FIND_BY_USER_ID, new QuestionRowMapper(), id);
+        return super.executeQuery(FIND_BY_USER_ID, new QuestionRowMapper(), id);
     }
 
     @Override

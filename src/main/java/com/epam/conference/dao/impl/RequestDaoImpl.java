@@ -30,23 +30,18 @@ public class RequestDaoImpl extends AbstractDao<Request> implements RequestDao {
     }
 
     @Override
-    public void removeById(Long id) throws DaoException {
-        super.removeById(id);
-    }
-
-    @Override
     public Long save(Request item) throws DaoException {
         return super.executeUpdateQuery(SAVE_QUERY, item.getSectionId(), item.getUserId(), item.getTopic());
     }
 
     @Override
     public List<RequestDto> getAllDtoByUserId(Long id) throws DaoException {
-        return executeJoinQuery(ALL_DTO_BY_USER_ID_QUERY, new RequestDtoRowMapper(), id);
+        return super.executeJoinQuery(ALL_DTO_BY_USER_ID_QUERY, new RequestDtoRowMapper(), id);
     }
 
     @Override
     public List<RequestDto> getAllDto() throws DaoException {
-        return executeJoinQuery(ALL_DTO_QUERY, new RequestDtoRowMapper());
+        return super.executeJoinQuery(ALL_DTO_QUERY, new RequestDtoRowMapper());
     }
 
     @Override

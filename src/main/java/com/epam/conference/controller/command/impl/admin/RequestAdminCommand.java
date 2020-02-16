@@ -23,7 +23,7 @@ public class RequestAdminCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        List<RequestDto> requestDtoList = requestService.getAllDto();
+        List<RequestDto> requestDtoList = requestService.getAllWithFullInfo();
         request.setAttribute(REQUESTS_ATTRIBUTE_NAME, requestDtoList);
 
         return CommandResult.forward(REQUEST_ADMIN_JSP);
