@@ -51,6 +51,9 @@
         <servlet-name>Controller</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
+    <error-page>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>

@@ -44,9 +44,14 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit">
         <fmt:message key="submit.login" bundle="${locale}"/>
     </button>
-    <c:if test="${sessionScope.containsKey('wrong')}">
-        <p class="mt-5 mb-3 text-muted">
-            <c:out value="${sessionScope.get('wrong')}"/>
+    <c:if test="${sessionScope.wrong_data}">
+        <p class="mb-3 text-muted">
+            <fmt:message key="warn.wrongUserData" bundle="${locale}"/>
+        </p>
+    </c:if>
+    <c:if test="${sessionScope.wrong_block}">
+        <p class="mb-3 text-muted">
+            <fmt:message key="warn.userBlock" bundle="${locale}"/>
         </p>
     </c:if>
 </form>

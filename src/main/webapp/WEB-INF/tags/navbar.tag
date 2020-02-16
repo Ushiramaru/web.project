@@ -10,9 +10,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <jsp:useBean id="user" scope="session" type="com.epam.conference.entity.User"/>
+            <c:if test="${sessionScope.containsKey('user')}">
+                <c:set value="${sessionScope.user.role}" var="role"/>
+            </c:if>
+            <c:if test="${!sessionScope.containsKey('user')}">
+                <c:set value="UNREGISTERED" var="role"/>
+            </c:if>
             <c:choose>
-                <c:when test="${user.role eq 'ADMINISTRATOR'}">
+                <c:when test="${role == 'UNREGISTERED'}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="controller?command=loginPage">
+                            <fmt:message key="nav.login" bundle="${locale}"/>
+                        </a>
+                    </li>
+                </c:when>
+                <c:when test="${role == 'ADMINISTRATOR'}">
                     <li class="nav-item">
                         <a class="nav-link" href="controller?command=conferenceAdmin">
                             <fmt:message key="nav.conferences" bundle="${locale}"/>
@@ -39,7 +51,7 @@
                         </a>
                     </li>
                 </c:when>
-                <c:when test="${user.role eq 'USER'}">
+                <c:when test="${role == 'USER'}">
                     <li class="nav-item">
                         <a class="nav-link" href="controller?command=conference">
                             <fmt:message key="nav.conferences" bundle="${locale}"/>
@@ -62,29 +74,37 @@
                     </li>
                 </c:when>
             </c:choose>
-            <li class="nav-item">
-                <a class="nav-link" href="controller?command=logout">
-                    <fmt:message key="nav.exit" bundle="${locale}"/>
-                </a>
-            </li>
+            <c:if test="${role != 'UNREGISTERED'}">
+                <li class="nav-item">
+                    <a class="nav-link" href="controller?command=logout">
+                        <fmt:message key="nav.exit" bundle="${locale}"/>
+                    </a>
+                </li>
+            </c:if>
             <button id="local-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#localCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="nav-local collapse" id="localCollapse">
-                <c:set value="${requestScope.get('javax.servlet.forward.query_string')}" var="back"/>
-                <jsp:useBean id="back" type="java.lang.String"/>
+                <c:if test="${requestScope.containsKey('javax.servlet.forward.query_string')}">
+                    <c:set value="${requestScope.get('javax.servlet.forward.query_string')}" var="back"/>
+                    <jsp:useBean id="back" type="java.lang.String"/>
+                    <c:set value="${back.replace('&', '__')}" var="back"/>
+                </c:if>
+                <c:if test="${!requestScope.containsKey('javax.servlet.forward.query_string')}">
+                    <c:set value="command=mainPage" var="back"/>
+                </c:if>
                 <li class="nav-item">
-                    <a class="nav-link" href="controller?command=language&l=ru_RU&back=<c:out value="${back.replace('&', '__')}"/>">
+                    <a class="nav-link" href="controller?command=language&l=ru_RU&back=<c:out value="${back}"/>">
                         RU
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="controller?command=language&l=en_EN&back=<c:out value="${back.replace('&', '__')}"/>">
+                    <a class="nav-link" href="controller?command=language&l=en_EN&back=<c:out value="${back}"/>">
                         EN
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="controller?command=language&l=by_BY&back=<c:out value="${back.replace('&', '__')}"/>">
+                    <a class="nav-link" href="controller?command=language&l=by_BY&back=<c:out value="${back}"/>">
                         BY
                     </a>
                 </li>

@@ -2,6 +2,7 @@ package com.epam.conference.controller.filter;
 
 import com.epam.conference.entity.User;
 import com.epam.conference.entity.enums.UserRole;
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -79,8 +80,8 @@ public class AccountPermissionFilter implements Filter {
         if (commandRoleMap.containsKey(command)) {
             List<UserRole> userRoles = commandRoleMap.get(command);
             if (!userRoles.contains(role)) {
-                ((HttpServletResponse) servletResponse).sendRedirect(ERROR_JSP);
                 LOGGER.info(role + " " + command);
+                ((HttpServletResponse) servletResponse).sendError(HttpStatus.SC_FORBIDDEN);
                 return;
             }
         }
