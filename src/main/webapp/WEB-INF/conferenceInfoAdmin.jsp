@@ -28,8 +28,8 @@
 <%--                    <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.newTopic" bundle="${locale}"/></h1>--%>
                     <input type="hidden" name="command" value="sectionEdit">
                     <input type="hidden" name="section_id" value="<c:out value="${section.id}"/>">
-                    <textarea maxlength="50" name="section_topic" type="text" class="form-control"
-                        placeholder="<fmt:message key="label.newTopic" bundle="${locale}"/>" required=""></textarea>
+                    <textarea type="text" name="section_topic" placeholder="<fmt:message key="label.newTopic" bundle="${locale}"/>"
+                              class="form-control" maxlength="50" required></textarea>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         <fmt:message key="submit.editSection" bundle="${locale}"/>
                     </button>

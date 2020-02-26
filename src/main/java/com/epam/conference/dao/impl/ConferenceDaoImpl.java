@@ -11,9 +11,9 @@ import java.util.List;
 
 public class ConferenceDaoImpl extends AbstractDao<Conference> implements ConferenceDao {
 
-    private static final String SAVE_QUERY = "insert into conference (name, start_date, end_date) VALUES (?, ?, ?)";
-    private static final String GET_ALL_BY_RELEVANT_QUERY = "select * from conference where is_relevant = ?";
-    private static final String SET_RELEVANT_QUERY = "update conference set is_relevant = ? where id = ?";
+    private final static String SAVE_QUERY = "insert into conference (name, start_date, end_date) VALUES (?, ?, ?)";
+    private final static String GET_ALL_BY_RELEVANT_QUERY = "select * from conference where is_relevant = ?";
+    private final static String SET_RELEVANT_QUERY = "update conference set is_relevant = ? where id = ?";
 
     public ConferenceDaoImpl(Connection connection) {
         super(connection);

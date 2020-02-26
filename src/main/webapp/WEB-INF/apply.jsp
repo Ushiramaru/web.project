@@ -10,11 +10,10 @@
     <label><c:out value="${section.topic}"/></label>
     <form class="form-signin" action="controller" method="post">
         <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.question" bundle="${locale}"/></h1>
-        <input name="command" value="apply" type="hidden">
-        <input name="section_id" value="<c:out value="${section.id}"/>" type="hidden">
+        <input type="hidden" name="command" value="apply">
+        <input type="hidden" name="section_id" value="<c:out value="${section.id}"/>">
         <label for="inputTopic" class="sr-only"><fmt:message key="label.topic" bundle="${locale}"/></label>
-        <textarea maxlength="50" name="topic" type="text" id="inputTopic" class="form-control"
-                  required="" autofocus=""></textarea>
+        <textarea type="text" name="topic" id="inputTopic" class="form-control" autofocus maxlength="50" required></textarea>
         <button class="btn btn-lg btn-primary btn-block" type="submit">
             <fmt:message key="submit.apply" bundle="${locale}"/>
         </button>

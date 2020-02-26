@@ -4,12 +4,12 @@ import com.epam.conference.entity.enums.RequestState;
 
 public class Request implements Identifiable {
 
-    public static final String TABLE = "request";
-    public static final String ID = "id";
-    public static final String SECTION_ID = "section_id";
-    public static final String USER_ID = "user_id";
-    public static final String TOPIC = "topic";
-    public static final String STATE = "state";
+    public final static String TABLE = "request";
+    public final static String ID = "id";
+    public final static String SECTION_ID = "section_id";
+    public final static String USER_ID = "user_id";
+    public final static String TOPIC = "topic";
+    public final static String STATE = "state";
 
     private final Long id;
     private final Long sectionId;

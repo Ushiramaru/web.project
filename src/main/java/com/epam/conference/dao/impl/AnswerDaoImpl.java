@@ -11,8 +11,8 @@ import java.util.Optional;
 
 public class AnswerDaoImpl extends AbstractDao<Answer> implements AnswerDao {
 
-    private static final String SAVE_QUERY = "insert into answer (administrator_id, content) VALUES (?, ?)";
-    private static final String DTO_BY_ID_QUERY = "select * from answer " +
+    private final static String SAVE_QUERY = "insert into answer (administrator_id, content) VALUES (?, ?)";
+    private final static String DTO_BY_ID_QUERY = "select * from answer " +
             "inner join user " +
             "on answer.administrator_id = user.id and answer.id = ? ";
 

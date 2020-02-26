@@ -16,7 +16,6 @@ public class RequestParameterValidatorImpl implements RequestParameterValidator 
 
     private final static Map<String, Predicate<Object>> VALIDATORS;
 
-
     static {
         VALIDATORS = new HashMap<>();
         VALIDATORS.put("l", new UncheckedParameterPredicate());

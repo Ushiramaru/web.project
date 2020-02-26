@@ -8,9 +8,9 @@
 <u:htmlBase title="${title}">
         <form class="form-signin" action="controller" method="post">
             <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.question" bundle="${locale}"/></h1>
-            <input name="command" value="ask" type="hidden">
+            <input type="hidden" name="command" value="ask">
             <label for="inputQuestion" class="sr-only"><fmt:message key="label.question" bundle="${locale}"/></label>
-            <textarea maxlength="50" name="content" type="text" id="inputQuestion" class="form-control" required="" autofocus="">
+            <textarea type="text" name="content" id="inputQuestion" class="form-control" autofocus maxlength="50" required>
             </textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">
                 <fmt:message key="submit.ask" bundle="${locale}"/>

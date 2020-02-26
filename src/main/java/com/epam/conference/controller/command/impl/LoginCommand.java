@@ -23,7 +23,7 @@ public class LoginCommand extends AbstractCommand {
     private final static String WRONG_BLOCK_ATTRIBUTE_NAME = "wrong_block";
     private final static String INVALID_PARAMETER_MESSAGE = "Invalid ? value";
 
-    private UserService service;
+    private final UserService service;
 
     public LoginCommand(RequestParameterExtractor parameterExtractor, RequestParameterValidator parameterValidator,
                         UserService service) {

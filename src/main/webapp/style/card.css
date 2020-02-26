@@ -2,10 +2,6 @@
     color: #28a745 !important;
 }
 
-.mt-2, .my-2 {
-    margin-top: .5rem !important;
-}
-
 .card {
     background-color: darkred;
     color: yellowgreen;

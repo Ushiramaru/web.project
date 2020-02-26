@@ -11,10 +11,10 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
-    private static final String DB_URL_KEY = "db.url";
-    private static final String DB_USER_KEY = "db.user";
-    private static final String DB_PASSWORD_KEY = "db.password";
-    private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
+    private final static String DB_URL_KEY = "db.url";
+    private final static String DB_USER_KEY = "db.user";
+    private final static String DB_PASSWORD_KEY = "db.password";
+    private final static String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
 
     private final String url;
     private final String user;

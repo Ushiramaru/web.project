@@ -4,11 +4,11 @@ import com.epam.conference.entity.enums.UserRole;
 
 public class User implements Identifiable {
 
-    public static final String TABLE = "user";
-    public static final String ID = "id";
-    public static final String NAME = "name";
-    public static final String ROLE = "role";
-    public static final String IS_ACTIVE = "is_active";
+    public final static String TABLE = "user";
+    public final static String ID = "id";
+    public final static String NAME = "name";
+    public final static String ROLE = "role";
+    public final static String IS_ACTIVE = "is_active";
 
     private final Long id;
     private final String name;

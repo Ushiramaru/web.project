@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class Conference implements Identifiable {
 
-    public static final String TABLE = "conference";
-    public static final String ID = "id";
-    public static final String NAME = "name";
-    public static final String START_DATE = "start_date";
-    public static final String END_DATE = "end_date";
-    public static final String IS_RELEVANT = "is_relevant";
+    public final static String TABLE = "conference";
+    public final static String ID = "id";
+    public final static String NAME = "name";
+    public final static String START_DATE = "start_date";
+    public final static String END_DATE = "end_date";
+    public final static String IS_RELEVANT = "is_relevant";
 
     private final Long id;
     private final String name;

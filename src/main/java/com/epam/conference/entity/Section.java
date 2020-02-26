@@ -2,10 +2,10 @@ package com.epam.conference.entity;
 
 public class Section implements Identifiable {
 
-    public static final String TABLE = "section";
-    public static final String ID = "id";
-    public static final String CONFERENCE_ID = "conference_id";
-    public static final String TOPIC = "topic";
+    public final static String TABLE = "section";
+    public final static String ID = "id";
+    public final static String CONFERENCE_ID = "conference_id";
+    public final static String TOPIC = "topic";
 
     private final Long id;
     private final Long conferenceId;

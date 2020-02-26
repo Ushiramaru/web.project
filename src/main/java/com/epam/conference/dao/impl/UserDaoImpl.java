@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    private static final String FIND_BY_LOGIN_AND_PASSWORD = "select * from user where login = ? and password = MD5(?)";
-    private static final String SAVE_QUERY = "insert into user (login, password, name) VALUES ('?', MD5('?'), '?')";
-    private static final String SET_IS_ACTIVE_QUERY = "update user set is_active = ? where id = ?";
+    private final static String FIND_BY_LOGIN_AND_PASSWORD = "select * from user where login = ? and password = MD5(?)";
+    private final static String SAVE_QUERY = "insert into user (login, password, name) VALUES ('?', MD5('?'), '?')";
+    private final static String SET_IS_ACTIVE_QUERY = "update user set is_active = ? where id = ?";
 
     public UserDaoImpl(Connection connection) {
         super(connection);

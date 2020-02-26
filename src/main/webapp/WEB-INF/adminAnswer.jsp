@@ -27,10 +27,10 @@
             </p>
             <form class="form-signin" action="controller" method="post">
                 <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.answer" bundle="${locale}"/></h1>
-                <input name="command" value="answerAdmin" type="hidden">
-                <input name="question_id" value="<c:out value="${question.id}"/>" type="hidden">
+                <input type="hidden" name="command" value="answerAdmin">
+                <input type="hidden" name="question_id" value="<c:out value="${question.id}"/>">
                 <label for="inputAnswer" class="sr-only"><fmt:message key="label.answer" bundle="${locale}"/></label>
-                <textarea maxlength="50" name="content" type="text" id="inputAnswer" class="form-control" required>
+                <textarea type="text" name="content" id="inputAnswer" class="form-control" maxlength="50" required>
                 </textarea>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     <fmt:message key="submit.answer" bundle="${locale}"/>

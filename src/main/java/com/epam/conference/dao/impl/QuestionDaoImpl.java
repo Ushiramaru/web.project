@@ -13,12 +13,12 @@ import java.util.Optional;
 
 public class QuestionDaoImpl extends AbstractDao<Question> implements QuestionDao {
 
-    private static final String SAVE_QUERY = "insert into question (user_id, content) VALUES (?, ?)";
-    private static final String FIND_BY_USER_ID = "select * from question where user_id = ?";
-    private static final String DTO_BY_ID_QUERY = "select * from question " +
+    private final static String SAVE_QUERY = "insert into question (user_id, content) VALUES (?, ?)";
+    private final static String FIND_BY_USER_ID = "select * from question where user_id = ?";
+    private final static String DTO_BY_ID_QUERY = "select * from question " +
             "inner join user " +
             "on question.user_id = user.id and question.id = ? ";
-    private static final String ANSWER_QUERY = "update question set answer_id = ? WHERE id = ?";
+    private final static String ANSWER_QUERY = "update question set answer_id = ? WHERE id = ?";
 
     public QuestionDaoImpl(Connection connection) {
         super(connection);

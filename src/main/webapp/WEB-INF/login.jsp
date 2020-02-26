@@ -34,13 +34,13 @@
         </ul>
     </div>
     <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.loginMessage" bundle="${locale}"/></h1>
-    <input name="command" value="login" type="hidden">
+    <input type="hidden" name="command" value="login">
     <label for="inputLogin" class="sr-only"><fmt:message key="label.login" bundle="${locale}"/></label>
-    <input name="login" value="pDestroyer" type="text" id="inputLogin" class="form-control"
-           placeholder="<fmt:message key="label.login" bundle="${locale}"/>" required="" autofocus="">
+    <input type="text" name="login" value="pDestroyer" id="inputLogin" class="form-control"
+           placeholder="<fmt:message key="label.login" bundle="${locale}"/>" autofocus required>
     <label for="inputPassword" class="sr-only"><fmt:message key="label.password" bundle="${locale}"/></label>
-    <input name="password" value="qwert" type="password" id="inputPassword" class="form-control"
-           placeholder="<fmt:message key="label.password" bundle="${locale}"/>" required="">
+    <input type="password" name="password" value="qwert" id="inputPassword" class="form-control"
+           placeholder="<fmt:message key="label.password" bundle="${locale}"/>" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">
         <fmt:message key="submit.login" bundle="${locale}"/>
     </button>

@@ -10,9 +10,9 @@ import java.util.List;
 
 public class SectionDaoImpl extends AbstractDao<Section> implements SectionDao {
 
-    private static final String SAVE_QUERY = "insert into section (conference_id, topic) VALUES (?, ?)";
-    private static final String FIND_BY_CONFERENCE_ID = "select * from section where conference_id = ?";
-    private static final String EDIT_BY_ID_QUERY = "update section set topic = ? where id = ?";
+    private final static String SAVE_QUERY = "insert into section (conference_id, topic) VALUES (?, ?)";
+    private final static String FIND_BY_CONFERENCE_ID = "select * from section where conference_id = ?";
+    private final static String EDIT_BY_ID_QUERY = "update section set topic = ? where id = ?";
 
     public SectionDaoImpl(Connection connection) {
         super(connection);

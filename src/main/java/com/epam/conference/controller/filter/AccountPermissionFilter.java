@@ -18,7 +18,6 @@ public class AccountPermissionFilter implements Filter {
 
     private final static String USER_ATTRIBUTE_NAME = "user";
     private final static String COMMAND_PARAMETER_NAME = "command";
-    private final static String ERROR_JSP = "/WEB-INF/error.jsp";
     private final static Map<String, List<UserRole>> commandRoleMap = new HashMap<>();
 
     static {
@@ -59,7 +58,7 @@ public class AccountPermissionFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

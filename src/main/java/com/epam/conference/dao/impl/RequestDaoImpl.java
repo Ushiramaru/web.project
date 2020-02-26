@@ -12,14 +12,14 @@ import java.util.List;
 
 public class RequestDaoImpl extends AbstractDao<Request> implements RequestDao {
 
-    private static final String SAVE_QUERY = "insert into request (section_id, user_id, topic) VALUES (?, ?, ?)";
-    private static final String SET_STATE_QUERY = "update request set state = ? where id = ?";
-    private static final String ALL_DTO_BY_USER_ID_QUERY = "select * from request " +
+    private final static String SAVE_QUERY = "insert into request (section_id, user_id, topic) VALUES (?, ?, ?)";
+    private final static String SET_STATE_QUERY = "update request set state = ? where id = ?";
+    private final static String ALL_DTO_BY_USER_ID_QUERY = "select * from request " +
             "inner join section " +
             "on request.section_id = section.id and request.user_id = ? " +
             "inner join conference " +
             "on section.conference_id = conference.id";
-    private static final String ALL_DTO_QUERY = "select * from request " +
+    private final static String ALL_DTO_QUERY = "select * from request " +
             "inner join section " +
             "on request.section_id = section.id " +
             "inner join conference " +

@@ -19,7 +19,7 @@ function registerAddSectionButtonListener() {
         textarea.setAttribute('type', 'text');
         textarea.setAttribute('maxlength', '50');
         textarea.setAttribute('placeholder', sectionsCount);
-        textarea.setAttribute('required', 'true');
+        textarea.setAttribute('required', '');
         textarea.setAttribute('id', 'section-topic-' + sectionsCount);
         $(textarea).addClass('form-control');
 

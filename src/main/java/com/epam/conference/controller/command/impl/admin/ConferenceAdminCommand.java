@@ -15,7 +15,7 @@ public class ConferenceAdminCommand implements Command {
     private final static String CONFERENCES_ATTRIBUTE_NAME = "conferences";
     private final static String CONFERENCE_ADMIN_JSP = "/WEB-INF/conferenceAdmin.jsp";
 
-    private ConferenceService service;
+    private final ConferenceService service;
 
     public ConferenceAdminCommand(ConferenceService service) {
         this.service = service;

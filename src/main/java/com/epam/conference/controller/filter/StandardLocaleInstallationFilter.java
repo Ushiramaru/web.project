@@ -9,7 +9,7 @@ public class StandardLocaleInstallationFilter implements Filter {
 
     private String language;
 
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig fConfig) {
         language = fConfig.getInitParameter("language");
     }
 

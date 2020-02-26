@@ -25,8 +25,8 @@ public class ConferenceInfoCommand extends AbstractCommand {
     private final static String CONFERENCE_INFO_JSP = "/WEB-INF/conferenceInfo.jsp";
     private final static String INVALID_PARAMETER_MESSAGE = "Invalid ? value";
 
-    private SectionService sectionService;
-    private ConferenceService conferenceService;
+    private final SectionService sectionService;
+    private final ConferenceService conferenceService;
 
     public ConferenceInfoCommand(RequestParameterExtractor parameterExtractor,
                                  RequestParameterValidator parameterValidator, SectionService sectionService, ConferenceService conferenceService) {

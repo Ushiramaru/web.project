@@ -2,10 +2,10 @@ package com.epam.conference.entity;
 
 public class Answer implements Identifiable {
 
-    public static final String TABLE = "answer";
-    public static final String ID = "id";
-    public static final String ADMINISTRATOR_ID = "administrator_id";
-    public static final String CONTENT = "content";
+    public final static String TABLE = "answer";
+    public final static String ID = "id";
+    public final static String ADMINISTRATOR_ID = "administrator_id";
+    public final static String CONTENT = "content";
 
     private final Long id;
     private final Long administratorId;
