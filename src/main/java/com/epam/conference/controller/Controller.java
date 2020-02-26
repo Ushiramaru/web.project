@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.DateTimeException;
 
 public class Controller extends HttpServlet {
 
@@ -30,7 +31,9 @@ public class Controller extends HttpServlet {
             commandResult = command.execute(request, response);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            if (e instanceof RuntimeException || e.getCause() != null) {
+            if (e instanceof IllegalArgumentException || e instanceof DateTimeException) {
+                response.sendError(HttpStatus.SC_BAD_REQUEST);
+            } else if (e instanceof RuntimeException || e.getCause() != null) {
                 response.sendError(HttpStatus.SC_INTERNAL_SERVER_ERROR);
             } else {
                 response.sendError(HttpStatus.SC_BAD_REQUEST);

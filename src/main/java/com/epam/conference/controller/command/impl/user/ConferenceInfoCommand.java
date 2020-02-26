@@ -1,8 +1,9 @@
 package com.epam.conference.controller.command.impl.user;
 
-import com.epam.conference.controller.command.Command;
 import com.epam.conference.controller.command.CommandResult;
-import com.epam.conference.controller.command.ParameterExtractor;
+import com.epam.conference.controller.command.impl.AbstractCommand;
+import com.epam.conference.controller.command.parameter.extractor.RequestParameterExtractor;
+import com.epam.conference.controller.command.parameter.validator.RequestParameterValidator;
 import com.epam.conference.entity.Conference;
 import com.epam.conference.entity.Section;
 import com.epam.conference.service.ConferenceService;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class ConferenceInfoCommand implements Command {
+public class ConferenceInfoCommand extends AbstractCommand {
 
     private final static String CONFERENCE_ID_PARAMETER_NAME = "conference_id";
     private final static String CONFERENCE_ATTRIBUTE_NAME = "conference";
@@ -22,19 +23,26 @@ public class ConferenceInfoCommand implements Command {
     private final static String CONFERENCE_NOT_FOUND_MESSAGE = "specified conference doesn't exist";
     private final static String CONFERENCE_IS_NOT_RELEVANT_MESSAGE = "specified conference doesn't relevant";
     private final static String CONFERENCE_INFO_JSP = "/WEB-INF/conferenceInfo.jsp";
+    private final static String INVALID_PARAMETER_MESSAGE = "Invalid ? value";
 
     private SectionService sectionService;
     private ConferenceService conferenceService;
 
-    public ConferenceInfoCommand(SectionService sectionService, ConferenceService conferenceService) {
+    public ConferenceInfoCommand(RequestParameterExtractor parameterExtractor,
+                                 RequestParameterValidator parameterValidator, SectionService sectionService, ConferenceService conferenceService) {
+        super(parameterExtractor, parameterValidator);
         this.sectionService = sectionService;
         this.conferenceService = conferenceService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        ParameterExtractor extractor = new ParameterExtractor();
-        Long conferenceId = Long.valueOf(extractor.extractParameter(request, CONFERENCE_ID_PARAMETER_NAME));
+        RequestParameterExtractor extractor = super.getParameterExtractor();
+        RequestParameterValidator validator = super.getParameterValidator();
+        Long conferenceId = extractor.extractLong(request, CONFERENCE_ID_PARAMETER_NAME);
+        if (!validator.isValid(CONFERENCE_ID_PARAMETER_NAME, conferenceId)) {
+            throw new ServiceException(INVALID_PARAMETER_MESSAGE.replace("?", CONFERENCE_ID_PARAMETER_NAME));
+        }
 
         Optional<Conference> optionalConference = conferenceService.getById(conferenceId);
         if (!optionalConference.isPresent()) {
