@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface RequestDao extends Dao<Request> {
 
-    List<RequestDto> getAllDtoByUserId(Long id) throws DaoException;
+    List<RequestDto> getAllWithFullInfoByUserId(Long id) throws DaoException;
 
-    List<RequestDto> getAllDto() throws DaoException;
+    List<RequestDto> getAllWithFullInfo() throws DaoException;
 
     void rejectById(Long id) throws DaoException;
 

@@ -35,12 +35,12 @@ public class RequestDaoImpl extends AbstractDao<Request> implements RequestDao {
     }
 
     @Override
-    public List<RequestDto> getAllDtoByUserId(Long id) throws DaoException {
+    public List<RequestDto> getAllWithFullInfoByUserId(Long id) throws DaoException {
         return super.executeJoinQuery(ALL_DTO_BY_USER_ID_QUERY, new RequestDtoRowMapper(), id);
     }
 
     @Override
-    public List<RequestDto> getAllDto() throws DaoException {
+    public List<RequestDto> getAllWithFullInfo() throws DaoException {
         return super.executeJoinQuery(ALL_DTO_QUERY, new RequestDtoRowMapper());
     }
 

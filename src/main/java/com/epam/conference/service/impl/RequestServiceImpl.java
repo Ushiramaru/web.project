@@ -32,7 +32,7 @@ public class RequestServiceImpl extends AbstractService<Request> implements Requ
     public List<RequestDto> getAllWithFullInfo() throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
-            return dao.getAllDto();
+            return dao.getAllWithFullInfo();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -72,7 +72,7 @@ public class RequestServiceImpl extends AbstractService<Request> implements Requ
     public List<RequestDto> getAllWithFullInfoByUserId(Long id) throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequestDao dao = factory.createRequestDao();
-            return dao.getAllDtoByUserId(id);
+            return dao.getAllWithFullInfoByUserId(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
