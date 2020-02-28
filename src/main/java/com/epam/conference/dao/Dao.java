@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * The interface Dao.
  *
- * @param <T> the type parameter
+ * @param <T> the type parameter of stored elements
  */
 public interface Dao<T extends Identifiable> {
 
@@ -17,7 +17,7 @@ public interface Dao<T extends Identifiable> {
      * Gets element by id.
      *
      * @param id the id of element
-     * @return the element by id from storage
+     * @return the element with specified id from storage
      * @throws DaoException when there are problems with the data storage
      */
     Optional<T> getById(Long id) throws DaoException;
@@ -35,7 +35,7 @@ public interface Dao<T extends Identifiable> {
      *
      * @param count the count of returned elements
      * @param from  start index of returned elements
-     * @return the count elements from storage starting from from
+     * @return the specified count elements from storage starting from specified from
      * @throws DaoException when there are problems with the data storage
      */
     List<T> getElementsFrom(Long count, Long from) throws DaoException;
@@ -44,7 +44,7 @@ public interface Dao<T extends Identifiable> {
      * Save item in storage.
      *
      * @param item the item what stored in storage
-     * @return the value of id of saved item
+     * @return the value of id of saved item in storage
      * @throws DaoException when there are problems with the data storage
      */
     Long save(T item) throws DaoException;
