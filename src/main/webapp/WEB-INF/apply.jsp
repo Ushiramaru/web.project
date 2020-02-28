@@ -9,7 +9,7 @@
     <jsp:useBean id="section" scope="request" type="com.epam.conference.entity.Section"/>
     <label><c:out value="${section.topic}"/></label>
     <form class="form-signin" action="controller" method="post">
-        <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.question" bundle="${locale}"/></h1>
+        <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="label.requestTopic" bundle="${locale}"/></h1>
         <input type="hidden" name="command" value="apply">
         <input type="hidden" name="section_id" value="<c:out value="${section.id}"/>">
         <label for="inputTopic" class="sr-only"><fmt:message key="label.topic" bundle="${locale}"/></label>

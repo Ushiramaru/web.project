@@ -12,4 +12,8 @@ public interface Service<T extends Identifiable> {
 
     List<T> getAll() throws ServiceException;
 
+    List<T> getElementsByPage(Long pageNumber, Long pageSize) throws ServiceException;
+
+    Long getElementsCount() throws ServiceException;
+
 }

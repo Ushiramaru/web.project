@@ -98,6 +98,28 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     }
 
     @Override
+    public List<T> getElementsFrom(Long count, Long from) throws DaoException {
+        String table = getTableName();
+        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
+
+        return executeQuery("select * from " + table + " limit ?, ?", mapper, from, count);
+    }
+
+    @Override
+    public Long getElementsCount() throws DaoException {
+        String table = getTableName();
+        try (PreparedStatement statement = createStatement("select count(*) from " + table);
+             ResultSet resultSet = statement.executeQuery()) {
+            if (!resultSet.next()) {
+                throw new DaoException("Can't get table size");
+            }
+            return resultSet.getLong(1);
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
     public Optional<T> getById(Long id) throws DaoException {
         String table = getTableName();
         RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);

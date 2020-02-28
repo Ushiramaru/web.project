@@ -9,6 +9,8 @@ public interface RequestParameterExtractor {
 
     Long extractLong(HttpServletRequest request, String name);
 
+    Long extractLongOrSpecified(HttpServletRequest request, String name, Long defaultValue);
+
     LocalDateTime extractDate(HttpServletRequest request, String name);
 
     String[] extractStrings(HttpServletRequest request, String name);

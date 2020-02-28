@@ -12,9 +12,11 @@ public class RequestParameterValidatorImpl implements RequestParameterValidator 
     private final static String UNKNOWN_PARAMETER_NAME_MESSAGE = "Unknown parameter ?";
     private final static String MIN_DATE = "1970-01-01T00:00";
     private final static String MAX_DATE = "2038-01-09T03:14";
+    private final static Long MIN_PAGE_NUMBER = 1L;
     private final static int MAX_CONTENT_LENGTH = 50;
 
     private final static Map<String, Predicate<Object>> VALIDATORS;
+
 
     static {
         VALIDATORS = new HashMap<>();
@@ -28,6 +30,8 @@ public class RequestParameterValidatorImpl implements RequestParameterValidator 
         VALIDATORS.put("question_id", new IdParameterPredicate());
         VALIDATORS.put("request_id", new IdParameterPredicate());
         VALIDATORS.put("section_id", new IdParameterPredicate());
+
+        VALIDATORS.put("pageNumber", new PageNumberRangePredicate(MIN_PAGE_NUMBER, Long.MAX_VALUE));
 
         VALIDATORS.put("content", new StringParameterLengthPredicate(MAX_CONTENT_LENGTH));
         VALIDATORS.put("topic", new StringParameterLengthPredicate(MAX_CONTENT_LENGTH));

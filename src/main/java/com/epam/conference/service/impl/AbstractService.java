@@ -39,6 +39,26 @@ public abstract class AbstractService<T extends Identifiable> implements Service
         }
     }
 
+    @Override
+    public List<T> getElementsByPage(Long pageNumber, Long pageSize) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            Dao<T> dao = getCurrentDao(factory);
+            return dao.getElementsFrom(pageSize, pageNumber * pageSize);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public Long getElementsCount() throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            Dao<T> dao = getCurrentDao(factory);
+            return dao.getElementsCount();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
     protected abstract Dao<T> getCurrentDao(DaoHelper factory);
 
 }

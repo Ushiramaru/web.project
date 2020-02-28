@@ -50,4 +50,7 @@
             </div>
         </div>
     </c:forEach>
+    <c:if test="${sessionScope.user.role eq 'ADMINISTRATOR'}">
+        <u:page pageCount="${requestScope.pageCount}" activePage="${requestScope.activePage}" commandName="questionAdmin"/>
+    </c:if>
 </u:htmlBase>

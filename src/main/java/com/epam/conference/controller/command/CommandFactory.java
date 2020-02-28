@@ -64,7 +64,8 @@ public class CommandFactory {
                 return new RequestAcceptCommand(parameterExtractor, parameterValidator,
                         new RequestServiceImpl(helperFactory));
             case "conferenceAdmin":
-                return new ConferenceAdminCommand(new ConferenceServiceImpl(helperFactory));
+                return new ConferenceAdminCommand(parameterExtractor, parameterValidator,
+                        new ConferenceServiceImpl(helperFactory));
             case "conferenceUnblock":
                 return new ConferenceUnblockCommand(parameterExtractor, parameterValidator,
                         new ConferenceServiceImpl(helperFactory));
@@ -90,7 +91,8 @@ public class CommandFactory {
             case "question":
                 return new QuestionCommand(new QuestionServiceImpl(helperFactory));
             case "questionAdmin":
-                return new QuestionAdminCommand(new QuestionServiceImpl(helperFactory));
+                return new QuestionAdminCommand(parameterExtractor, parameterValidator,
+                        new QuestionServiceImpl(helperFactory));
             case "answer":
                 return new AnswerCommand(parameterExtractor, parameterValidator, new AnswerServiceImpl(helperFactory));
             case "conferenceInfoAdmin":

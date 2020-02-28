@@ -1,6 +1,6 @@
-<%@tag language="java" pageEncoding="UTF-8" %>
+<%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
-<%@attribute name="title" required="true" rtexprvalue="true" type="java.lang.String" %>
+<%@ attribute name="title" required="true" rtexprvalue="true" type="java.lang.String" %>
 <!doctype html>
 <html lang="en" class="h-100">
 <head>
@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/card.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/form.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/table.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/page.css">
     <!-- Css end-->
 
 </head>

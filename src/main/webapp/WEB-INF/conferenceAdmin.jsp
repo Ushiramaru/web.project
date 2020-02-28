@@ -56,4 +56,5 @@
             </tbody>
         </table>
     </div>
+    <u:page pageCount="${requestScope.pageCount}" activePage="${requestScope.activePage}" commandName="conferenceAdmin"/>
 </u:htmlBase>

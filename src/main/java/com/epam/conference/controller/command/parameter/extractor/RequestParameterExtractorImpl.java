@@ -29,6 +29,16 @@ public class RequestParameterExtractorImpl implements RequestParameterExtractor 
         return extractParameters(request, name);
     }
 
+    @Override
+    public Long extractLongOrSpecified(HttpServletRequest request, String name, Long defaultValue) {
+        String value = request.getParameter(name);
+        if (value == null) {
+            return defaultValue;
+        }
+
+        return Long.valueOf(value);
+    }
+
     private String extractParameter(HttpServletRequest request, String name) {
         String param = request.getParameter(name);
         if (param == null) {

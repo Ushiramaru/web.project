@@ -35,7 +35,7 @@ public class LanguageCommand extends AbstractCommand {
         HttpSession session = request.getSession();
         session.setAttribute(LANGUAGE_ATTRIBUTE_NAME, language);
         String back = extractor.extractString(request, BACK_PARAMETER_NAME);
-        if (!validator.isValid(BACK_PARAMETER_NAME, language)) {
+        if (!validator.isValid(BACK_PARAMETER_NAME, back)) {
             throw new ServiceException(INVALID_PARAMETER_MESSAGE.replace("?", BACK_PARAMETER_NAME));
         }
         back = back.replace(PARAMETER_DELIMITER_IN_BACK_PARAMETER, STANDARD_PARAMETER_DELIMITER);
